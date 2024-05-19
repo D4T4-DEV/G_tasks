@@ -1,13 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 .cont-login {
-  font-family: "Kanit", sans-serif;
+  border: solid 2px #D4D4D8;
   color: #331f15;
   padding: 20px;
   border-radius: 8px;
-  display: inline;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 500px;
+  height: 400px;
   margin: 0 auto;
+}
+
+.titulo {
+  font-family: "Poetsen One", sans-serif;
+  color: #331f15;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#formulario {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.etiq-form {
+  font-family: "Poetsen One", sans-serif;
+  margin-bottom: 6px;
+  font-size: 17px;
+}
+
+.inpt-form {
+  font-family: "Nunito", sans-serif;
+  width: auto;
+  padding: 2.5%;
+  margin-bottom: 12px;
+  border: 1px solid #79532f;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+  color: #66452d;
+  font-size: 13px;
+}
+.inpt-form:focus {
+  border-color: #946b36;
+}
+
+.btn {
+  font-family: "Poetsen One", sans-serif;
+  background-color: #66452d;
+  border-radius: 5px;
+  border: none;
+  padding: 2.8%;
+  color: #FFF;
+  transition: background-color 0.3s ease;
+  font-size: 17px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #79532f;
+}
+
+.etiq-ch {
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 17px;
+}
+
+#show-pwd {
+  accent-color: #946b36;
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .cont-login {
+    max-width: 420px;
+    width: 90%;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .cont-login {
+    max-width: 80%;
+  }
 }
 
 /*# sourceMappingURL=loginStyles.css.map */

@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        link(rel="stylesheet", href="/css/globalStyless.css")
+        link(rel="stylesheet", href="/css/loginStyles.css")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Iniciar Sesión
+    body 
+        .cont-login
+            h2.Titulo 
+            form(action="/iniciar-sesion", method="post")
+                //- Medios del usuario
+                label(for="user" class='etiq-form') Usuario  
+                input(type="text", name="user", class='inpt-form' required)
+                //- Medios de la contrasenia
+                label(for="pwd" class='etiq-form') Contraseña  
+                input(type="password", name="pwd", id='pwd', class='inpt-form' required)
+
+                //- Medio para mostrar la contrasenia
+                label(for="checkBoxPWD" class='etiq-form')
+                    input(type="checkbox" id="show-pwd" name="checkBoxPWD")
+                    |  Mostrar contraseña
+
+                //- Boton
+                button(type="submit", class="btn") Iniciar Sesión
+
+        //- Script para mostrar la contraseña
+        script.
+
+            const isSelected = document.getElementById("show-pwd");
+            const pwd = document.getElementById("pwd");
+
+            // Evento cuando se tenga un click
+            isSelected.addEventListener('click', () => {
+                if(pwd.type === 'password') {
+                    pwd.type = 'text';
+                } else { 
+                    pwd.type = 'password';
+                }
+            });

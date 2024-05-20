@@ -4,9 +4,23 @@ html(lang="en")
         meta(charset="UTF-8")
         link(rel="stylesheet", href="/css/globalStyless.css")
         link(rel="stylesheet", href="/css/loginStyles.css")
+        link(rel="stylesheet", href="/css/alertaNotifi.css")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         title Iniciar Sesión
     body 
+
+        div#alerta 
+            .cont-alert 
+                span(class="material-symbols-outlined" id='icon-error') error
+                span#mensaje Estamos experimentando problemashasgdasgdjagh...
+                span#cerrar-notificacion &times
+        script.
+            const x = document.getElementById("alerta");
+            x.className = "show-alert";
+            setTimeout(function(){ x.className = x.className.replace("show-alert", ""); }, 3500);
+
+
         .cont-login
             h2.titulo Iniciar sesión
             form(action="/iniciar-sesion", method="post", id='formulario')

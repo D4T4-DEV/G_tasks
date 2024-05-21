@@ -14,8 +14,8 @@
 }
 #alerta.show-alert {
   visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 3s forwards;
-  animation: fadein 0.5s, fadeout 0.5s 3s forwards;
+  -webkit-animation: fadein 1s, fadeout 0.5s 3s forwards;
+  animation: fadein 1s, fadeout 0.5s 3s forwards;
 }
 
 #icon-error {

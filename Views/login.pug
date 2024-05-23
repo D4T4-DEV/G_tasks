@@ -13,12 +13,28 @@ html(lang="en")
         div#alerta 
             .cont-alert 
                 span(class="material-symbols-outlined" id='icon-error') error
-                span#mensaje Estamos experimentando problemashasgdasgdjagh...
-                span#cerrar-notificacion &times
+                .cont-text
+                    p#titulo-error Error
+                    span#mensaje Estamos experimentando problemashasgdasgdjagh
+                    span#cerrar-notificacion &times
+        //-Script para mostrar la notificacion
         script.
-            const x = document.getElementById("alerta");
-            x.className = "show-alert";
-            setTimeout(function(){ x.className = x.className.replace("show-alert", ""); }, 4500);
+            const divAlert = document.getElementById("alerta");
+            divAlert.className = "show-alert";
+            const closeAlert = document.getElementById("cerrar-notificacion");
+
+                closeAlert.addEventListener("click", () => {
+                    divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
+                    // Tiempo para que se desarrolle la animacion y se elimine
+                    setTimeout(() => {
+                        divAlert.remove();
+                    }, 2000); 
+                });
+            setTimeout(function(){ 
+                divAlert.className = divAlert.className.replace("show-alert", ""); 
+                // Removemos la notificacion
+                divAlert.remove();
+            }, 10000);
 
 
         .cont-login
@@ -42,7 +58,6 @@ html(lang="en")
 
         //- Script para mostrar la contraseña
         script.
-
             const isSelected = document.getElementById("show-pwd");
             const pwd = document.getElementById("pwd");
 
@@ -54,3 +69,4 @@ html(lang="en")
                     pwd.type = 'password';
                 }
             });
+

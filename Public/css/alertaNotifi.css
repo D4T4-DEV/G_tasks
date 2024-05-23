@@ -14,14 +14,26 @@
 }
 #alerta.show-alert {
   visibility: visible;
-  -webkit-animation: fadein 1s, fadeout 0.5s 3s forwards;
-  animation: fadein 1s, fadeout 0.5s 3s forwards;
+  -webkit-animation: fadein 1s, fadeout 1s 3s forwards;
+  animation: fadein 1s, fadeout 1s 3s forwards;
+}
+#alerta.close-alert {
+  -webkit-animation: fadeout 1s 1.9s forwards;
+  animation: fadeout 1s 2s forwards;
+}
+
+.cont-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 #icon-error {
   color: #946b36;
   font-size: 20px;
   margin-right: 5px;
+  display: flex;
+  align-items: center;
 }
 
 #cerrar-notificacion {
@@ -30,8 +42,12 @@
   margin-left: 5px;
   cursor: pointer;
   position: fixed;
-  top: 30px;
-  right: 38px;
+  top: 0px;
+  right: 8px;
+}
+
+#titulo-error {
+  font-weight: bold;
 }
 
 #mensaje {
@@ -44,26 +60,26 @@
 
 @-webkit-keyframes fadein {
   from {
-    opacity: 0;
+    transform: translateX(500px);
   }
   to {
-    opacity: 1;
+    transform: translateX(0);
   }
 }
 @keyframes fadein {
   from {
-    opacity: 0;
+    transform: translateX(500px);
   }
   to {
-    opacity: 1;
+    transform: translateX(0);
   }
 }
 @-webkit-keyframes fadeout {
   from {
-    opacity: 1;
+    transform: translateX(0);
   }
   to {
-    opacity: 0;
+    transform: translateX(500px);
   }
 }
 @media only screen and (max-width: 600px) {
@@ -73,7 +89,6 @@
   }
   #mensaje {
     font-size: 14px;
-    text-align: left;
     margin-left: 0.5rem;
   }
   #icon-error {

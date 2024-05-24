@@ -7,12 +7,15 @@ const express = require('express');
 const router = express.Router();
 
 // Ruta de login
-const loginView = require('./login'); 
+const loginView = require('./loginView'); 
 
+// Ruta de la pantalla principal
+const pPrincipalView = require('./pantallaPrincipalView');
 
 
 // Configuracion login
-router.use('/', loginView);
+// router.use('/', loginView);
+router.use('/', pPrincipalView);
 
 
 // Exportacion del archivo

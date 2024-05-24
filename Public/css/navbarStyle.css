@@ -1,0 +1,89 @@
+.cont-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  max-width: 650px;
+  width: 100%;
+  height: 80px;
+  border: solid 2px #D4D4D8;
+  color: #331f15;
+  border-radius: 10px;
+  margin: 50px;
+}
+
+#ol-navbar {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  margin: 12px;
+}
+
+.li-navbar {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.text {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  font-family: "Poetsen One", sans-serif;
+  font-size: 18px;
+}
+
+.enlace {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+  background-color: #66452d;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.enlace:hover {
+  background-color: #79532f;
+}
+
+@media only screen and (max-width: 600px) {
+  .cont-navbar {
+    max-width: 350px;
+    margin: 20px;
+  }
+  #ol-navbar {
+    font-size: 15px;
+  }
+  .li-navbar {
+    padding: 0;
+  }
+  .text {
+    padding: 0;
+    font-size: 17px;
+  }
+  .cont-btn {
+    width: 130px;
+  }
+  .enlace {
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .cont-navbar {
+    max-width: 550px;
+  }
+  #ol-navbar {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  #ol-navbar {
+    font-size: 18px;
+  }
+}
+
+/*# sourceMappingURL=navbarStyle.css.map */

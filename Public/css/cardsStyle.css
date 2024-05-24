@@ -1,0 +1,65 @@
+.cont-pagina {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  height: 325px;
+}
+
+.card {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  border: solid 2px #D4D4D8;
+  border-radius: 10px;
+  justify-content: space-around;
+  align-items: center;
+  width: 325px;
+  margin: 10px;
+}
+
+.cont-btn {
+  margin-left: 20px;
+}
+
+.btn-tasks {
+  background-color: #66452d;
+  padding: 8px;
+  width: 180px;
+  text-align: center;
+  border-radius: 15px;
+  color: #FFF;
+  font-family: "Poetsen One", sans-serif;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+.btn-tasks:hover {
+  background-color: #79532f;
+}
+
+.titulo {
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+  color: #331f15;
+}
+
+.tasks-num {
+  font-size: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .cont-pagina {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 825px;
+  }
+  .card {
+    margin-bottom: 2rem;
+    height: 500px;
+  }
+  .cont-btn {
+    margin-left: 0px;
+  }
+}
+
+/*# sourceMappingURL=cardsStyle.css.map */

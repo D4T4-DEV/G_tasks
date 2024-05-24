@@ -9,7 +9,10 @@ const router = express.Router();
 
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
-    res.render('login');
+
+    var errorMensaje = "Soy un mensaje de servidor!";
+
+    res.render('login', {errorText: errorMensaje});
 });
 
 

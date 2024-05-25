@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones Pop-up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <style>
+        /* styles.css */
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #notification-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .notification {
+            background-color: #333;
+            color: #fff;
+            padding: 16px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadein 0.5s;
+        }
+
+        .notification p {
+            margin: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .notification.fadeout {
+            animation: fadeout 0.5s;
+            opacity: 0;
+            /* Asegúrate de que la notificación sea invisible después de la animación */
+        }
+    </style>
+
+    <button id="notifyBtn">Mostrar Notificación</button>
+    <div id="notification-container"></div>
+    <script>
+        // scripts.js
+
+        // scripts.js
+
+        document.getElementById('notifyBtn').addEventListener('click', function () {
+            showNotification("Esta es una notificación apilable.");
+        });
+
+        function showNotification(message) {
+            var container = document.getElementById('notification-container');
+
+            var notification = document.createElement('div');
+            notification.className = 'notification';
+
+            var closeBtn = document.createElement('span');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '&times;';
+            closeBtn.onclick = function () {
+                closeNotification(notification);
+            };
+
+            var messageElem = document.createElement('p');
+            messageElem.textContent = message;
+
+            notification.appendChild(closeBtn);
+            notification.appendChild(messageElem);
+            container.appendChild(notification);
+
+            setTimeout(function () {
+                closeNotification(notification);
+            }, 3000);
+        }
+
+        function closeNotification(notification) {
+            notification.classList.add('fadeout');
+            setTimeout(function () {
+                notification.remove();
+            }, 500); // Tiempo suficiente para que la animación de desvanecimiento se complete
+        }
+
+    </script>
+</body>
+
+</html>

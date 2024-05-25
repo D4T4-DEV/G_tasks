@@ -4,62 +4,37 @@ html(lang="es")
         meta(charset="UTF-8")
         link(rel="stylesheet", href="/css/globalStyle.css")
         link(rel="stylesheet", href="/css/loginStyle.css")
-        link(rel="stylesheet", href="/css/alertErrorStyle.css")
+        link(rel="stylesheet", href="/css/alertStyle.css")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         title Iniciar Sesión
     body 
+        //- Error de server
+        if typeOfError === 1
+            include Elements_pug/Alerts/fatalErrorAlert.pug 
 
-        div#alerta 
-            .cont-alert 
-                span(class="material-symbols-outlined" id='icon-error') error
-                .cont-text
-                    p#titulo-error Error
-                    span#mensaje #{errorText}
-                    span#cerrar-notificacion &times
-        //-Script para mostrar la notificacion
-        script.
-            const divAlert = document.getElementById("alerta");
-            const closeAlert = document.getElementById("cerrar-notificacion");
-
-            divAlert.className = "show-alert";
-
-            // Evento click
-            closeAlert.addEventListener("click", () => {
-                divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
-                // Tiempo para que se ejecute la animacion y se elimine
-                setTimeout(() => {
-                    divAlert.remove();
-                }, 2000); 
-            });
-
-            // Funcion para cambiar el estado de la clase y removerlo dado un tiempo
-            setTimeout(function(){ 
-                // Cambio de clase
-                divAlert.className = divAlert.className.replace("show-alert", ""); 
-                // Removemos la notificacion
-                divAlert.remove(); 
-            }, 5000);
-
+        if typeOfError === 2
+            include Elements_pug/Alerts/credentialsIncorrectAlert.pug 
 
         .cont-login
-            h2.titulo Iniciar sesión
-            form(action="/iniciar-sesion", method="post", id='formulario')
+            h2.titulo Login
+            form(action="/sign-in-login", method="post", id='formulario')
                 //- Medios del usuario
-                label(for="user" class='etiq-form') Usuario  
+                label(for="user" class='etiq-form') User  
                 input(type="text", name="user", id='user' class='inpt-form' required)
                 //- Medios de la contrasenia
-                label(for="pwd" class='etiq-form') Contraseña  
+                label(for="pwd" class='etiq-form') Password  
                 input(type="password", name="pwd", id='pwd', class='inpt-form' required)
 
                 //- Medio para mostrar la contrasenia
                 label(for="show-pwd" class='etiq-ch')
                     input(type="checkbox" id="show-pwd" name="checkBoxPWD")
-                    |  Mostrar contraseña
+                    |  Show password
 
 
                 //- Boton
-                button(type="submit", class="btn") Iniciar Sesión
+                button(type="submit", class="btn") Sign in
 
         //- Script para mostrar la contraseña
         script.

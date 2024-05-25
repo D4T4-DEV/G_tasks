@@ -1,0 +1,29 @@
+//- Para estilizar esto usa "alertStyle"
+div#alerta 
+    .cont-alert 
+        span(class="material-symbols-outlined" id='icon-error') newspaper
+        .cont-text
+            p#titulo-error New task
+            span#mensaje Hey, you have a new task.
+            span#cerrar-notificacion &times
+//-Script para mostrar la notificacion
+script.
+    const divAlert = document.getElementById("alerta");
+    const closeAlert = document.getElementById("cerrar-notificacion")
+
+    divAlert.className = "show-alert"
+    // Evento click
+    closeAlert.addEventListener("click", () => {
+        divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
+        // Tiempo para que se ejecute la animacion y se elimine
+        setTimeout(() => {
+            divAlert.remove();
+        }, 2000); 
+    })
+    // Funcion para cambiar el estado de la clase y removerlo dado un tiempo
+    setTimeout(function(){ 
+        // Cambio de clase
+        divAlert.className = divAlert.className.replace("show-alert", ""); 
+        // Removemos la notificacion
+        divAlert.remove(); 
+    }, 11000);

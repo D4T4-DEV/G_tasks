@@ -45,6 +45,10 @@
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  display: flex;
+  width: 120px;
+  justify-content: center;
+  margin-left: 15px;
 }
 .enlace:hover {
   background-color: #79532f;
@@ -70,6 +74,7 @@
   }
   .enlace {
     font-size: 14px;
+    margin-left: 0;
   }
 }
 @media only screen and (min-width: 601px) and (max-width: 1024px) {

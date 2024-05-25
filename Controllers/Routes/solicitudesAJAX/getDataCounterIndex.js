@@ -6,10 +6,19 @@
 const express = require('express');
 const router = express.Router();
 
+var numCreate = 19;
+var numNews = 1;
+var numPending = 2;
+var numComplet = 4;
 
-// Ruta de renderizado de la vista 
+// Ruta de respuesta AJAX de la vista 'index'
 router.get('/', (req, res) => {
-    res.render('pantallaPrincipal');
+    res.json({
+        numCreate: numCreate++,
+        numNews: numNews,
+        numPending: numPending,
+        numComplet: numComplet
+    });
 });
 
 

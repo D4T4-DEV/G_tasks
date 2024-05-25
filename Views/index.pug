@@ -1,0 +1,25 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/pantallaPrincStyle.css")
+        link(rel="stylesheet", href="/css/navbarStyle.css")
+        link(rel="stylesheet", href="/css/globalStyle.css")
+        link(rel="stylesheet", href="/css/cardsStyle.css")
+        link(rel="stylesheet", href="/css/alertStyle.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        title G_Tasks
+    body 
+    
+
+        .cont-notify
+            //- Alerta 
+            include Elements_pug/Alerts/newTask.pug
+            include Elements_pug/Alerts/someTaskChanged.pug
+        //-NavBar
+        include Elements_pug/navbar.pug
+        //- Opciones de tareas
+        include Elements_pug/cards.pug 
+        //- Opciones de refresco

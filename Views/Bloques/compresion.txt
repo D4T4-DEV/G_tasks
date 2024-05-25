@@ -1,2 +1,0 @@
-Los bloques de contenido creados:
-    - navbar (para estilizarlo se necesita navbarStyle.sass)

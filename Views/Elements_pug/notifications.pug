@@ -1,0 +1,86 @@
+#cont-noti
+
+script.
+    // funcion para obtener datos de las tareas del lado del servidor
+    function getDataCounterTasks(){
+        fetch('/get-state-notif')
+            .then(response=> response.json())
+            .then(data=>{
+                notType = data.notification;
+                showNoti(data.notification);
+            })
+        .catch(error => console.error('No traje nada en la solicitud ajax'));
+    }
+
+    // Intervalo de ejecucion de la funcion que tramita los datos
+    setInterval(getDataCounterTasks, 5000);
+
+    function showNoti(num){
+        if(num == 1){
+            document.getElementById("cont-noti").innerHTML =  
+            `
+                <div id="alerta">
+                    <div class="cont-alert">
+                        <span class="material-symbols-outlined" id="icon-error">newspaper</span>
+                        <div class="cont-text">
+                            <p id="titulo-error">New task</p>
+                            <span id="mensaje">Hey, you have a new task.</span>
+                            <span id="cerrar-notificacion">&times;</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        if(num == 2){
+            document.getElementById("cont-noti").innerHTML =  
+            `
+                <div id="alerta">
+                    <div class="cont-alert">
+                        <span class="material-symbols-outlined" id="icon-error">change_circle</span>
+                        <div class="cont-text">
+                            <p id="titulo-error">Changed task</p>
+                            <span id="mensaje">Hey, some task changed.</span>
+                            <span id="cerrar-notificacion">&times;</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        if(num == 3){
+            document.getElementById("cont-noti").innerHTML =  
+            `
+                <div id="alerta">
+                    <div class="cont-alert">
+                        <span class="material-symbols-outlined" id="icon-error">check_circle</span>
+                        <div class="cont-text">
+                            <p id="titulo-error">Good Job</p>
+                            <span id="mensaje">You have completed a task.</span>
+                            <span id="cerrar-notificacion">&times;</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Medio que muestra el elemento como notificacion
+        const divAlert = document.getElementById("alerta");
+        const closeAlert = document.getElementById("cerrar-notificacion")
+        divAlert.className = "show-alert";
+        // Evento click
+        closeAlert.addEventListener("click", () => {
+            divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
+            // Tiempo para que se ejecute la animacion y se elimine
+            setTimeout(() => {
+                divAlert.remove();
+            }, 2000); 
+        });
+        // Funcion para cambiar el estado de la clase y removerlo dado un tiempo
+        setTimeout(function(){ 
+            // Cambio de clase
+            divAlert.className = divAlert.className.replace("show-alert", ""); 
+            // Removemos la notificacion
+            divAlert.remove(); 
+        }, 11000);
+    }

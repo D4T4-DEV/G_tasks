@@ -1,0 +1,133 @@
+//- Para estilizar esto usa: "cardsStyle"
+
+.cont-pagina 
+
+    .card
+        h1.titulo Pending Tasks
+        h2.tasks-num
+            #counter-create 0
+        a.btn-tasks(href="/created-tasks") Details
+
+    .card
+        h1.titulo  Completed Tasks
+        h2.tasks-num 
+            #counter-new 0
+        a.btn-tasks(href="/new-tasks") Details
+
+    .card
+        h1.titulo  Total tasks
+        h2.tasks-num 
+            #counter-new 0
+        a.btn-tasks(href="/all-task-created") Show all
+
+script.
+
+    // Variables
+        // Variables que se obtienen por la solicitud (inicializacion)
+        var numCreate = 0;
+        var numNews = 0;
+        var numPending = 0;
+        var numComplet = 0;
+
+    // Variables del contador
+        // Variables que se actualizan y toman en base al contador (esta se muestra al usuario)
+        var numCreateTasks = 0;
+        var numNewTasks = 0;
+        var numPendingTasks = 0;
+        var numCompleTasks = 0;
+
+    // funcion para obtener datos de las tareas del lado del servidor
+    function getDataCounterTasks(){
+        fetch('/get-counter-data-my-created')
+            .then(response=> response.json())
+            .then(data=>{
+                numCreate = data.numCreate;
+                numNews = data.numNews;
+                numPending = data.numPending;
+                numComplet = data.numComplet;
+                updateCountersT();
+            })
+        .catch(error => console.error('No traje nada en la solicitud ajax'));
+    }
+
+    // Tomado de: https://www.geeksforgeeks.org/how-to-make-animated-counter-using-javascript/ GRACIAS GEEKS FOR GEEKS 💕
+    // Funcion para actualizar el numero mostrado Codigo del contador (animacion y desplazamiento de num) 
+    function updateCountersT(){
+        // Creamos un intervalo de timepo para que se muestre una animacion de contar
+        var intervalCreateTasks = setInterval(function() { // Funcion de intervalo para 'My Created Tasks'
+            // Verificamos antes si el numero que viene de la solicitud es mayor a 20
+            if(numCreate > 20){
+                document.getElementById("counter-create").innerText = abrevNumber(numCreate); // Insercion de los datos al DOOM por medio de HTML
+                clearInterval(intervalCreateTasks);
+            }else{
+                // Si es menor a 20 lo contamos
+                if (numCreateTasks < numCreate) {
+                    document.getElementById("counter-create").innerText = ++numCreateTasks;
+                } else {
+                    // Quitamos el intervalo
+                    clearInterval(intervalCreateTasks);
+                }
+            }
+        }, 30);
+
+        var intervalNews = setInterval(function() { // Funcion de intervalo para 'New Tasks'
+            if(numNews > 20){
+                document.getElementById("counter-create").innerText = abrevNumber(numNews); 
+                clearInterval(intervalNews);
+            }else{
+                if (numNewTasks < numNews) {
+                    document.getElementById("counter-new").innerText = ++numNewTasks;
+                } else {
+                    clearInterval(intervalNews);
+                }
+            }
+        }, 30);
+
+        var intervalPending = setInterval(function() { // Funcion de intervalo para 'Pending Tasks'
+            if(numPending > 20){
+                document.getElementById("counter-create").innerText = abrevNumber(numPending);
+                clearInterval(intervalPending);
+            }else{
+                if (numPendingTasks < numPending) {
+                    document.getElementById("counter-pending").innerText = ++numPendingTasks;
+                } else {
+                    clearInterval(intervalPending);
+                }
+            }
+        }, 30);
+
+        var intervalComplet = setInterval(function() { // Funcion de intervalo para 'Completed Tasks'
+            if(numComplet > 20){
+                document.getElementById("counter-create").innerText = abrevNumber(numPending);
+                clearInterval(intervalComplet);
+            }else{
+                if (numCompleTasks < numComplet) {
+                    document.getElementById("counter-completed").innerText = ++numCompleTasks;
+                } else {
+                    clearInterval(intervalComplet);
+                }
+            }
+        }, 30);
+    }
+
+    // Funcion para abreviar numeros dependiente de que tamaño tienen
+    function abrevNumber(num){
+        if(num < 1000){
+            return num
+        }
+        if(num >= 1000 && numTotal < 1000000){
+            return (num/1000) + 'K';
+        }
+        if(num >= 1000000 && num < 1000000000000){
+            return (num/1000000) + 'M';
+        }
+        if(num >= 1000000000000){
+            return (num/1000000000000) + 'B';
+        }
+    }
+
+    // Llamada a la funcion para obtener los primeros datos
+    getDataCounterTasks();
+
+    // Intervalo de ejecucion de la funcion que tramita los datos
+    setInterval(getDataCounterTasks, 5000);

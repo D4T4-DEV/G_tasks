@@ -10,16 +10,14 @@ html(lang="es")
         link(rel="stylesheet", href="/css/alertStyle.css")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         title G_Tasks
     body 
-    
-
-        .cont-notify
-            //- Alerta 
-            include Elements_pug/Alerts/newTask.pug
-            include Elements_pug/Alerts/someTaskChanged.pug
+        //- Notificaciones
+        include Elements_pug/notifications.pug
         //-NavBar
         include Elements_pug/navbar.pug
         //- Opciones de tareas
-        include Elements_pug/cards.pug 
-        //- Opciones de refresco
+        include Elements_pug/cardsIndex.pug
+
+    script.

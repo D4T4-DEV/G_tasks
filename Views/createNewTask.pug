@@ -12,7 +12,6 @@ html(lang="es")
         .cont-form 
             a(href="/created-tasks" class="atras")
                 span(class="material-symbols-outlined") arrow_back 
-
             h2.titulo Create new task
             form(action="/create-new-task" class="formulario" method='POST' autocomplete="off")
                 label(class="etiqueta-form") Title task
@@ -26,7 +25,7 @@ html(lang="es")
                     option(value="2" class='option-s') David  
 
                 label(class="etiqueta-form") Instructions
-                textarea(name="instructions" class="entrada", required)
+                textarea(name="instructions" class="entrada text-area", required)
 
                 label(class="etiqueta-form") Deadline
                 input(type="date", name="date-finish" class="entrada" required)
@@ -38,27 +37,31 @@ html(lang="es")
     
     script.
         var numUser = 1;
-            // Evento click del btn 'new-person'
-            document.getElementById('new-person').addEventListener('click', function() {
+        // Evento click del btn 'new-person'
+        document.getElementById('new-person').addEventListener('click', function() {
 
-                document.getElementById('new-person').style.marginTop ='8px';
+            document.getElementById('new-person').style.marginTop ='8px';
 
-                numUser ++;
-                // Cadena de HTML
-                const formHTML = `
+            numUser ++;
+            // Cadena de HTML
+            const formHTML = `
+                <div class=cont-new-user id='${numUser}'>
                     <hr class='division'>
-                    <label class="etiqueta-form">User ${numUser}</label>
+                    <div class='cont-close-btn'><span class="eliminated-user">&times</span></div>
+                    <label class="etiqueta-form">User</label>
                     <select name="user" class="entrada" required>
                         <option value="1" class='option-s'>Manuel</option>
                         <option value="2" class='option-s'>David</option>
                     </select>
                     <label class="etiqueta-form">Instructions</label>
-                    <textarea name="instructions" class="entrada" required></textarea>
+                    <textarea name="instructions" class="entrada text-area" required></textarea>
                     <label class="etiqueta-form">Deadline</label>
                     <input type="date" name="date-finish" class="entrada"  required>
-                `;
+                </div>
+            `;
 
-                // Tomamos la referencia del elemento  Insertamos el valor al DOM, indicandole que lo queremos antes de este elemento
-                document.getElementById('new-person').insertAdjacentHTML('beforebegin', formHTML);
-            });
+            // Tomamos la referencia del elemento  Insertamos el valor al DOM, indicandole que lo queremos antes de este elemento
+            document.getElementById('new-person').insertAdjacentHTML('beforebegin', formHTML);
+        });
+
 

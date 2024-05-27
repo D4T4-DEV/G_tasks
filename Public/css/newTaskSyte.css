@@ -81,7 +81,7 @@
   padding-top: 8px;
 }
 
-#text-area {
+.text-area {
   background-color: transparent;
   height: 200px;
   width: 100%;
@@ -96,10 +96,10 @@
   overflow-x: hidden;
   font-weight: bold;
 }
-#text-area::-webkit-scrollbar {
+.text-area::-webkit-scrollbar {
   width: 8px;
 }
-#text-area::-webkit-scrollbar-thumb {
+.text-area::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 5px;
 }
@@ -128,6 +128,22 @@
 .option-s {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
+}
+
+.eliminated-user {
+  font-size: 22px;
+  color: #331f15;
+  cursor: pointer;
+  width: 20px;
+}
+
+.cont-close-btn {
+  text-align: right;
+}
+
+.cont-new-user {
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (max-width: 600px) {

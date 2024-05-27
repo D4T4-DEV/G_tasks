@@ -15,21 +15,21 @@ html(lang="es")
 
             h2.titulo Create new task
             form(action="/create-new-task" class="formulario" method='POST' autocomplete="off")
-                label(for="title" class="etiqueta-form") Title task
-                input(type="text", placeholder="Title", id="title", name="title", class="entrada", required)
+                label(class="etiqueta-form") Title task
+                input(type="text", placeholder="Title", name="title", class="entrada", required)
 
                 hr(class='division')
-                label(for="user" class="etiqueta-form") User 1
-                select(name="user", id="user", class="entrada", required) 
+                label(class="etiqueta-form") User 1
+                select(name="user", class="entrada", required) 
                     //- Esto cambialo de manera nativa
                     option(value="1" class='option-s') Manuel 
                     option(value="2" class='option-s') David  
 
-                label(for="text-area" class="etiqueta-form") Instructions
-                textarea(name="instructions" class="entrada", id='text-area', required)
+                label(class="etiqueta-form") Instructions
+                textarea(name="instructions" class="entrada", required)
 
-                label(for="date-finish" class="etiqueta-form") Deadline
-                input(type="date", name="date-finish" class="entrada" id="date-finish" required)
+                label(class="etiqueta-form") Deadline
+                input(type="date", name="date-finish" class="entrada" required)
 
                 button(type='button' id='new-person' class='btn-add-user') 
                     span(class="material-symbols-outlined") person_add
@@ -47,15 +47,15 @@ html(lang="es")
                 // Cadena de HTML
                 const formHTML = `
                     <hr class='division'>
-                    <label for="user" class="etiqueta-form">User ${numUser}</label>
-                    <select name="user" id="user" class="entrada" required>
+                    <label class="etiqueta-form">User ${numUser}</label>
+                    <select name="user" class="entrada" required>
                         <option value="1" class='option-s'>Manuel</option>
                         <option value="2" class='option-s'>David</option>
                     </select>
-                    <label for="text-area" class="etiqueta-form">Instructions</label>
-                    <textarea name="instructions" class="entrada" id="text-area" required></textarea>
-                    <label for="date-finish" class="etiqueta-form">Deadline</label>
-                    <input type="date" name="date-finish" class="entrada" id="date-finish" required>
+                    <label class="etiqueta-form">Instructions</label>
+                    <textarea name="instructions" class="entrada" required></textarea>
+                    <label class="etiqueta-form">Deadline</label>
+                    <input type="date" name="date-finish" class="entrada"  required>
                 `;
 
                 // Tomamos la referencia del elemento  Insertamos el valor al DOM, indicandole que lo queremos antes de este elemento

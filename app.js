@@ -20,7 +20,29 @@ app.use(express.json()); // -> Entender datos en Formato JSON
 
 //Rutas 
 const router = require("./Controllers/Routes/routes");
-app.use('/', router); // Seteo de rutas puestas en el archivo de ROUTS
+app.use('/', router); // Seteo de rutas puestas en el archivo de ROUTES
+
+
+// Prueba del formulario
+app.post('/create-new-task', (req, res) => {
+  // Extraer los datos del cuerpo de la solicitud
+  const title = req.body.title;
+  const user = req.body.user;
+  const instructions = req.body.instructions;
+  const deadline = req.body['date-finish'];
+
+
+  // Imprimimos en consola
+  console.log('Title:', title);
+  console.log('User:', user);
+  console.log('Instructions:', instructions);
+  console.log('Deadline:', deadline);
+
+  // Respuesta generica
+  res.send('Tarea creada correctamente');
+});
+
+
 
 // Inicializacion del puerto que será ejecutado el server local
 const PORT = 3000;

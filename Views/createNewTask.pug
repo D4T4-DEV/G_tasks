@@ -1,0 +1,32 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="newTaskSyte.css")
+        link(rel="stylesheet", href="/css/globalStyle.css")
+        link(rel="stylesheet", href="/css/newTaskSyte.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        title New task
+    body 
+        .cont-form 
+            a(href="/created-tasks" class="atras")
+                span(class="material-symbols-outlined") arrow_back 
+
+            h2.titulo Create new task
+            form(action="/create-new-task" class="formulario" method='POST')
+                label(for="title" class="etiqueta-form") Title task
+                input(type="text", placeholder="Title", id="title", name="title", class="entrada", required)
+
+                label(for="user" class="etiqueta-form") User
+                select(name="user", id="user", class="entrada", required) 
+
+                label(for="instructions" class="etiqueta-form") Instructions
+                textarea(name="instructions[]" class="entrada", required) 
+                input(type="password", placeholder="Confirmar contraseña", id="confirmPassword", name="confirmPassword", class="entrada", required)
+
+                button(type="submit", class="btn") Add
+        
+            p.texto Se aplican  
+                a(href='/terminos-y-condiciones' class="registrate") Terminos y Condiciones
+

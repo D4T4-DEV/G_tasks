@@ -15,18 +15,19 @@ const pPrincipalView = require('./indexView');
 // Ruta de la pantalla de "myCreatedTask"
 const pMyCreatedTask = require('./createdTaskView');
 
+// Ruta de la pantalla de "newTask"
+const pNewTask = require('./createTaskView');
+
 // RUTAS para usar en AJAX
 const getDataCounterIndex = require('./solicitudesAJAX/getDataCounterIndex');
 const getDataNotifications = require('./solicitudesAJAX/getStatesNotification');
-
-
 // Confuguracion de las rutas AJAX
 router.use('/get-counter-data', getDataCounterIndex);
 router.use('/get-state-notif', getDataNotifications);
 
 
 // Configuracion login
-// router.use('/', loginView);
+router.use('/', loginView);
 
 // Configuracion de la pantalla principal
 router.use('/principal', pPrincipalView);
@@ -34,6 +35,8 @@ router.use('/principal', pPrincipalView);
 // Configuracion de la pantalla de myCreatedTask
 router.use('/created-tasks', pMyCreatedTask);
 
+// Configuracion de la pantalla de newTask
+router.use('/new-task', pNewTask);
 
 
 // Exportacion del archivo

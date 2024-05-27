@@ -28,6 +28,7 @@ app.post('/create-new-task', (req, res) => {
   // Extraer los datos del cuerpo de la solicitud
   const title = req.body.title;
   const user = req.body.user;
+  const taskRespon = req.body['task-responsibility'];
   const instructions = req.body.instructions;
   const deadline = req.body['date-finish'];
 
@@ -35,6 +36,7 @@ app.post('/create-new-task', (req, res) => {
   // Imprimimos en consola
   console.log('Title:', title);
   console.log('User:', user);
+  console.log('Responsability', taskRespon);
   console.log('Instructions:', instructions);
   console.log('Deadline:', deadline);
 

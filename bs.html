@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX con Express</title>
+</head>
+
+<body>
+    <h1>AJAX con Express</h1>
+    <button id="ajaxButton">Hacer solicitud AJAX</button>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('ajaxButton').addEventListener('click', function () {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/data', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('response').innerText = JSON.parse(xhr.responseText).message;
+                } else {
+                    document.getElementById('response').innerText = 'Error en la solicitud AJAX';
+                }
+            };
+            xhr.send();
+        });
+
+    </script>
+</body>
+
+</html>

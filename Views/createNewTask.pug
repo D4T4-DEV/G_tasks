@@ -5,10 +5,13 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="/css/globalStyle.css")
         link(rel="stylesheet", href="/css/newTaskSyte.css")
+        link(rel="stylesheet", href="/css/alertStyle.css")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         title New task
     body 
+        .cont-noti
         .cont-form 
             a(href="/created-tasks" class="atras")
                 span(class="material-symbols-outlined") arrow_back 
@@ -18,14 +21,17 @@ html(lang="es")
                 input(type="text", placeholder="Title", name="title", class="entrada", required)
 
                 hr(class='division')
-                label(class="etiqueta-form") User 1
+                label(class="etiqueta-form") User
                 select(name="user", class="entrada", required) 
                     //- Esto cambialo de manera nativa
                     option(value="1" class='option-s') Manuel 
                     option(value="2" class='option-s') David  
 
+                label(class="etiqueta-form") Task responsibility
+                input(type="text", placeholder="Task responsibility", name="task-responsibility", class="entrada", required)
+
                 label(class="etiqueta-form") Instructions
-                textarea(name="instructions" class="entrada text-area", required)
+                textarea(name="instructions" class="entrada" class='text-area', required)
 
                 label(class="etiqueta-form") Deadline
                 input(type="date", name="date-finish" class="entrada" required)
@@ -36,16 +42,12 @@ html(lang="es")
                 button(type="submit", class="btn") Add
     
     script.
-        var numUser = 1;
         // Evento click del btn 'new-person'
         document.getElementById('new-person').addEventListener('click', function() {
 
-            document.getElementById('new-person').style.marginTop ='8px';
-
-            numUser ++;
             // Cadena de HTML
             const formHTML = `
-                <div class=cont-new-user id='${numUser}'>
+                <div class=cont-new-user>
                     <hr class='division'>
                     <div class='cont-close-btn'><span class="eliminated-user">&times</span></div>
                     <label class="etiqueta-form">User</label>
@@ -53,6 +55,8 @@ html(lang="es")
                         <option value="1" class='option-s'>Manuel</option>
                         <option value="2" class='option-s'>David</option>
                     </select>
+                    <label class="etiqueta-form">Task responsibility</label>
+                    <input type="text" placeholder="Task responsibility" name="task-responsibility" class="entrada" required>
                     <label class="etiqueta-form">Instructions</label>
                     <textarea name="instructions" class="entrada text-area" required></textarea>
                     <label class="etiqueta-form">Deadline</label>
@@ -62,6 +66,60 @@ html(lang="es")
 
             // Tomamos la referencia del elemento  Insertamos el valor al DOM, indicandole que lo queremos antes de este elemento
             document.getElementById('new-person').insertAdjacentHTML('beforebegin', formHTML);
+
+                // Evento de click para borrar a un nuevo usuario
+                document.querySelectorAll('.eliminated-user').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        // Busca el contenedor cercano al evento que contenga la clase .cont-new-user y devuelve su referencia
+                        var divCont = button.closest('.cont-new-user');
+                        // Comprobamos si tenemos la referencia, de ser así lo eliminamos
+                        if (divCont) {
+                            divCont.remove();
+                            const cont_noti = document.querySelector('.cont-noti');
+                            showNotify(cont_noti);
+                        }
+                    });
+                });
         });
+
+        function showNotify(ref){
+            const alertHTML = 
+            `
+                <div id="alerta" class="alertStyle">
+                    <div class="cont-alert">
+                        <span class="material-symbols-outlined" id="icon-error">person_cancel</span>
+                        <div class="cont-text">
+                            <p id="titulo-error">User deleted</p>
+                            <span id="mensaje">Hey, you've removed a user from this task.</span>
+                        </div>
+                        <span id="cerrar-notificacion">&times;</span>
+                    </div>
+                </div>
+            `;
+
+            ref.innerHTML = alertHTML;
+
+            const divAlert = document.getElementById("alerta");
+            const closeAlert = document.getElementById("cerrar-notificacion")
+            divAlert.className = "show-alert"
+            // Evento click
+            closeAlert.addEventListener("click", () => {
+                divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
+                // Tiempo para que se ejecute la animacion y se elimine
+                setTimeout(() => {
+                    divAlert.remove();
+                }, 2000); 
+            })
+            // Funcion para cambiar el estado de la clase y removerlo dado un tiempo
+            setTimeout(function(){ 
+                // Cambio de clase
+                divAlert.className = divAlert.className.replace("show-alert", ""); 
+                // Removemos la notificacion
+                divAlert.remove(); 
+            }, 4000);  
+        }
+
+
+
 
 

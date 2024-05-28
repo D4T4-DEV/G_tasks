@@ -16,7 +16,7 @@
   list-style: none;
   display: flex;
   padding: 0;
-  align-items: center;
+  align-items: flex-end;
   margin: 12px;
 }
 
@@ -55,19 +55,13 @@
 }
 
 #icon-back {
-  color: #FFF;
-  background-color: #66452d;
-  border-radius: 100%;
+  color: #66452d;
   font-size: 30px;
-  margin-right: 25px;
-}
-#icon-back:hover {
-  background-color: #79532f;
 }
 
 @media only screen and (max-width: 600px) {
   .cont-navbar {
-    max-width: 350px;
+    max-width: 300px;
     margin: 20px;
   }
   #ol-navbar {
@@ -86,11 +80,12 @@
   .enlace {
     font-size: 14px;
     margin-left: 0;
+    width: 100px;
   }
 }
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .cont-navbar {
-    max-width: 550px;
+    max-width: 415px;
   }
   #ol-navbar {
     font-size: 18px;

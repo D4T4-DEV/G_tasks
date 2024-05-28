@@ -34,7 +34,7 @@ html(lang="es")
                 textarea(name="instructions" class="entrada" class='text-area', required)
 
                 label(class="etiqueta-form") Deadline
-                input(type="date", name="date-finish" class="entrada" required)
+                input(type="date", name="date-finish" class="entrada date-input" required)
 
                 button(type='button' id='new-person' class='btn-add-user') 
                     span(class="material-symbols-outlined") person_add
@@ -42,6 +42,31 @@ html(lang="es")
                 button(type="submit", class="btn") Add
     
     script.
+
+        const editDate = document.querySelector('.date-input');
+
+        // Formatea la fecha actual en formato yyyy-mm-dd
+        function obtenerFechaActual() {
+            const today = new Date();
+            var day = today.getDate();
+            var month = String(today.getMonth() + 1);
+            const year = today.getFullYear();
+
+            // Medio para poderle poner un cero antes si es un numero de 1-9, que tenga 01-09
+            if(month < 10){
+                month = '0' + month;
+            }
+
+            if(day < 10){
+                day = '0' + day;
+            }
+
+            return `${year}-${month}-${day}`;
+        }
+
+        // Establecer la fecha máxima del input a la fecha actual
+        document.querySelector('.date-input').min = obtenerFechaActual();
+
         // Evento click del btn 'new-person'
         document.getElementById('new-person').addEventListener('click', function() {
 

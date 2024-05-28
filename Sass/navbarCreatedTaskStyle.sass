@@ -17,7 +17,7 @@
     list-style: none
     display: flex
     padding: 0
-    align-items: center
+    align-items: flex-end
     margin: 12px
 
 .li-navbar
@@ -52,22 +52,15 @@
         background-color: $kumera-700
 
 #icon-back
-    color: #FFF
-    background-color: $kumera-800
-    border-radius: 100%
+    color: $kumera-800
     font-size: 30px
-    margin-right: 25px
-
-    &:hover
-        background-color: $kumera-700
-
 
 //Media Querys
 
 //Dispositivos moviles
 @media only screen and (max-width: 600px) 
     .cont-navbar 
-        max-width: 350px
+        max-width: 300px
         margin: 20px
 
     #ol-navbar
@@ -86,11 +79,12 @@
     .enlace
         font-size: 14px
         margin-left: 0
+        width: 100px
 
 // Tabletas 
 @media only screen and (min-width: 601px) and (max-width: 1024px)
     .cont-navbar 
-        max-width: 550px
+        max-width: 415px
 
     #ol-navbar
         font-size: 18px

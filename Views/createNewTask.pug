@@ -90,7 +90,7 @@ html(lang="es")
 
             // Tomamos la referencia del elemento  Insertamos el valor al DOM, indicandole que lo queremos antes de este elemento
             document.getElementById('new-person').insertAdjacentHTML('beforebegin', formHTML);
-            
+
             //   Referencia del div contenedor     tipo de notificacion
             showNotify(document.querySelector('.cont-noti'), 2);
 
@@ -108,11 +108,11 @@ html(lang="es")
                     });
                 });
 
-                // Referencia y procesado de elementos existentes 
+                // Referencia y procesado de la fecha 
                 document.querySelectorAll('.date-input').forEach(function(element) {
-                    // Le damos el valor de la fecha bloqueada
+                    // Le damos el valor de la fecha bloqueada a cada elemento que se obtenga 
                     element.min = obtenerFechaActual();
-                    // Añadimos que este no pueda teclear la fecha, si no seleccionarla
+                    // Añadimos que este no pueda teclear la fecha, si no seleccionarla a cada elemento que se obtenga
                     element.addEventListener('keydown', function(e) {
                         e.preventDefault();
                     });

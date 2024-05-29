@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true })); // Aceptar Cadenas o arreglos
 app.use(express.json()); // -> Entender datos en Formato JSON
 
 //Rutas 
-const router = require("./Controllers/Routes/routes");
+const router = require("./Routes/routes");
 app.use('/', router); // Seteo de rutas puestas en el archivo de ROUTES
 
 

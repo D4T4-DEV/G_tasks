@@ -10,9 +10,13 @@ const router = express.Router();
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
 
-    var typeOfErr = 2;
+    const alerta = {
+        icon: 'sick',
+        title: 'Connection error',
+        msn: 'Can not connect to server.'
+    };
 
-    res.render('login', {typeOfError: typeOfErr});
+    res.render('login', {alerta: alerta});
 });
 
 

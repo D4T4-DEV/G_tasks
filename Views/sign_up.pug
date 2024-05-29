@@ -7,13 +7,18 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
     body
+
+        //- Alertas
+        if alerta
+            include Frag/alertasCarcasa.pug 
+
         .cont-signup
             .cont-flecha
                 a(href="/" class="atras")
                     span(class="material-symbols-outlined") arrow_back 
 
             h2.titulo Sign Up
-            form(action="/registrar-new-user" class="formulario" method='POST')
+            form(action="/signup-new-user" class="formulario" method='POST')
                 label(for="usuario" class="etiqueta-form") Username
                 input(type="text", placeholder="Username", id="usuario", name="usuario", class="entrada", required)
 

@@ -10,7 +10,12 @@ const router = express.Router();
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
 
-    res.render('sign_up');
+    const alerta = {
+        icon: 'sick',
+        title: 'Mamarre',
+        msn: 'Como lo mueve esa muchachota.'
+    }; 
+    res.render('sign_up',{alerta:alerta});
 });
 
 

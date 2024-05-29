@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
 
-.cont-login
+// Estilo del contenedor
+.cont-signup
   border: solid 2px #D4D4D8
   color: $kumera-950
   padding: 20px
@@ -13,27 +14,31 @@
   justify-content: center
   width: 100%
   max-width: 500px
-  height: 400px
+  height: 500px
   margin: 0 auto
 
+// Estilo del titulo
 .titulo 
   font-family: "Poetsen One", sans-serif
   color: $kumera-950
   font-size: 25px
   text-align: center
   margin-bottom: 12px
-
-#formulario
+    
+// Estilo del formulario
+.formulario
   display: flex
   flex-direction: column
   width: 70%
 
-.etiq-form
+// Estilo para los labels
+.etiqueta-form
   font-family: "Poetsen One", sans-serif
   margin-bottom: 6px
   font-size: 17px
 
-.inpt-form
+// Estilo para los inputs
+.entrada
   font-family: "Nunito", sans-serif
   width: auto
   padding: 2.5%
@@ -44,9 +49,10 @@
   color: $kumera-800
   font-size: 13px
 
-.inpt-form:focus
+.entrada:focus
     border-color: $kumera-600
 
+// Estilo del btn
 .btn
   font-family: "Poetsen One", sans-serif
   background-color: $kumera-800
@@ -61,31 +67,37 @@
   &:hover
     background-color: $kumera-700
 
-.etiq-ch
-  font-family: "Nunito", sans-serif
-  display: flex
-  align-items: center
-  margin-bottom: 12px
-  font-size: 17px
+.cont-flecha
+    width: 100%
 
-#show-pwd
+.atras
+    text-decoration: none
+    color: $kumera-700
+    font-weight: bolder
+
+// Estilo del ojito
+#checkboxLabel
   accent-color: $kumera-600
   margin-right: 5px
+  margin-bottom: 10px
+  font-family: "Nunito", sans-serif
+
+.texto
+    padding-top: 8px
 
 
 //Media Querys
 
 //Dispositivos moviles
 @media only screen and (max-width: 600px)
-    .cont-login
+    .cont-signup
         max-width: 420px
         width: 90%
 
 // Tabletas 
 @media only screen and (min-width: 601px) and (max-width: 1024px)
-    .cont-login
+    .cont-signup
         max-width: 80%
 
 // Desktops
 @media only screen and (min-width: 1025px)
-    

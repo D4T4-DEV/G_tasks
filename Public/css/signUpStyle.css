@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-.cont-login {
+.cont-signup {
   border: solid 2px #D4D4D8;
   color: #331f15;
   padding: 20px;
@@ -11,7 +11,7 @@
   justify-content: center;
   width: 100%;
   max-width: 500px;
-  height: 400px;
+  height: 500px;
   margin: 0 auto;
 }
 
@@ -23,19 +23,19 @@
   margin-bottom: 12px;
 }
 
-#formulario {
+.formulario {
   display: flex;
   flex-direction: column;
   width: 70%;
 }
 
-.etiq-form {
+.etiqueta-form {
   font-family: "Poetsen One", sans-serif;
   margin-bottom: 6px;
   font-size: 17px;
 }
 
-.inpt-form {
+.entrada {
   font-family: "Nunito", sans-serif;
   width: auto;
   padding: 2.5%;
@@ -47,7 +47,7 @@
   font-size: 13px;
 }
 
-.inpt-form:focus {
+.entrada:focus {
   border-color: #946b36;
 }
 
@@ -66,29 +66,37 @@
   background-color: #79532f;
 }
 
-.etiq-ch {
-  font-family: "Nunito", sans-serif;
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 17px;
+.cont-flecha {
+  width: 100%;
 }
 
-#show-pwd {
+.atras {
+  text-decoration: none;
+  color: #79532f;
+  font-weight: bolder;
+}
+
+#checkboxLabel {
   accent-color: #946b36;
   margin-right: 5px;
+  margin-bottom: 10px;
+  font-family: "Nunito", sans-serif;
+}
+
+.texto {
+  padding-top: 8px;
 }
 
 @media only screen and (max-width: 600px) {
-  .cont-login {
+  .cont-signup {
     max-width: 420px;
     width: 90%;
   }
 }
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-  .cont-login {
+  .cont-signup {
     max-width: 80%;
   }
 }
 
-/*# sourceMappingURL=loginStyle.css.map */
+/*# sourceMappingURL=signUpStyle.css.map */

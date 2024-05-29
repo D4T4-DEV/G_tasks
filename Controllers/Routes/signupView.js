@@ -1,21 +1,16 @@
 /*
-    Este archivo describe las acciones que se daran durante la pantalla principal 
+    Este archivo describe las acciones que se daran durante el signup 
     y como se mostrará en cuestión.
 */
 
 const express = require('express');
 const router = express.Router();
 
+
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
-    const alerta = {
-        icon: 'sick',
-        title: 'Connection error',
-        msn: 'Can not connect to server.'
-    };
 
-
-    res.render('index', {alerta: alerta});
+    res.render('sign_up');
 });
 
 

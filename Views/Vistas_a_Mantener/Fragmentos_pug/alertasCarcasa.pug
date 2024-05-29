@@ -1,0 +1,44 @@
+//- Para estilizar esto usa "alertStyle"
+div#alerta 
+    .cont-alert 
+        span(class="material-symbols-outlined" id='icon-error') #{alerta.icon}
+    
+        .cont-text
+            p#titulo-error #{alerta.title}
+            span#mensaje #{alerta.msn}
+            span#cerrar-notificacion &times
+//-Script para mostrar la notificacion
+script.
+
+    // Agregacion del elemento a la cabecera *ENLACE DE LOS ICONOS*
+    const linkGoogleIncons = document.createElement('link');
+    linkGoogleIncons.rel = 'stylesheet';
+    linkGoogleIncons.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200';
+    document.head.appendChild(linkGoogleIncons);
+
+    // Agregacion de su hojas de estilos
+    const linkStyleCSS = document.createElement('link');
+    linkStyleCSS.rel = 'stylesheet';
+    linkStyleCSS.href = '/css/alertStyle.css';
+    document.head.appendChild(linkStyleCSS);
+
+    const divAlert = document.getElementById("alerta");
+    const closeAlert = document.getElementById("cerrar-notificacion");
+    divAlert.className = "show-alert";
+
+    // Evento click de la notificacion
+    closeAlert.addEventListener("click", () => {
+        divAlert.className = divAlert.className.replace("show-alert", "close-alert"); 
+        // Tiempo para que se ejecute la animacion y se elimine
+        setTimeout(() => {
+            divAlert.remove();
+        }, 2000); 
+    });
+
+    // Funcion para cambiar el estado de la clase y removerlo dado un tiempo
+    setTimeout(function(){ 
+        // Cambio de clase
+        divAlert.className = divAlert.className.replace("show-alert", ""); 
+        // Removemos la notificacion
+        divAlert.remove(); 
+    }, 11000);

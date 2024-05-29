@@ -9,6 +9,9 @@ const router = express.Router();
 // Ruta de login
 const loginView = require('./loginView'); 
 
+// Ruta del signup
+const signupView = require('./signupView');
+
 // Ruta de la pantalla principal
 const pPrincipalView = require('./indexView');
 
@@ -28,6 +31,9 @@ router.use('/get-state-notif', getDataNotifications);
 
 // Configuracion login
 router.use('/', loginView);
+
+// Configuracion del sigup
+router.use('/sign-up', signupView);
 
 // Configuracion de la pantalla principal
 router.use('/principal', pPrincipalView);

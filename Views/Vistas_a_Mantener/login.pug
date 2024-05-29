@@ -1,14 +1,14 @@
 doctype html
-html(lang="es")
+html(lang="en")
     head
         meta(charset="UTF-8")
         link(rel="stylesheet", href="/css/globalStyle.css")
-        link(rel="stylesheet", href="/css/loginStyle.css")
+        link(rel="stylesheet", href="/css/logInStyle.css")
         link(rel="stylesheet", href="/css/alertStyle.css")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
         link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
-        title Iniciar Sesión
+        title Login
     body 
         //- Error de server
         if typeOfError === 1
@@ -32,9 +32,12 @@ html(lang="es")
                     input(type="checkbox" id="show-pwd" name="checkBoxPWD")
                     |  Show password
 
-
                 //- Boton
                 button(type="submit", class="btn") Sign in
+            // Contenido del registrarse
+            .cont-link
+                p.texto You do not have an account?
+                    a(href='/sign-up' class="registrate") Sign up
 
         //- Script para mostrar la contraseña
         script.
@@ -49,4 +52,3 @@ html(lang="es")
                     pwd.type = 'password';
                 }
             });
-

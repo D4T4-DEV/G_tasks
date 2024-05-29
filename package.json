@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass Styles/:Public/css/",
-    "sass-watch": "sass -w Sass/:Public/css/",
+    "sass-watch": "sass -w Styles/Sass/:Public/css/",
     "nodemon-watch": "nodemon app.js",
     "start": "npm-run-all --parallel sass-watch nodemon-watch"
   },

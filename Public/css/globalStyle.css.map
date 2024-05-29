@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../Sass/globalStyle.sass","../../Sass/colorPalette.sass"],"names":[],"mappings":"AACQ;AACA;AACA;AAER;EACE;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACQ;EACA;;;AAER;EACQ;;;AACR;EACI;EACA,OCRS;EDST;EACA;EACA;EACA;EACA;EACA","file":"globalStyle.css"}
+{"version":3,"sourceRoot":"","sources":["../../Styles/Sass/globalStyle.sass","../../Styles/Sass/colorPalette.sass"],"names":[],"mappings":"AACQ;AACA;AACA;AAER;EACE;EACA;EACA;EACA;EACA;EACA;;;AAEF;EACQ;EACA;;;AAER;EACQ;;;AACR;EACI;EACA,OCRS;EDST;EACA;EACA;EACA;EACA;EACA","file":"globalStyle.css"}

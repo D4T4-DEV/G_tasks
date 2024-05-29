@@ -1,0 +1,48 @@
+doctype html
+html(lang="es")
+    head 
+        title Sign up
+        link(rel='stylesheet', href='/css/signUpStyle.css')
+        link(rel='stylesheet', href='/css/globalStyle.css')
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+    body
+        .cont-signup
+            .cont-flecha
+                a(href="/" class="atras")
+                    span(class="material-symbols-outlined") arrow_back 
+
+            h2.titulo Sign Up
+            form(action="/registrar-new-user" class="formulario" method='POST')
+                label(for="usuario" class="etiqueta-form") Username
+                input(type="text", placeholder="Username", id="usuario", name="usuario", class="entrada", required)
+
+                label(for="correo" class="etiqueta-form") Email
+                input(type="text", placeholder="Email", id="correo", name="correo", class="entrada", required)
+                
+                label(for="contrasenia" class="etiqueta-form") Password
+                input(type="password", placeholder="Password", id="contrasenia", name="contrasenia", class="entrada", required)
+
+                label(for="confirmPassword" class="etiqueta-form") Confirm Password
+                input(type="password", placeholder="Confirm Password", id="confirmPassword", name="confirmPassword", class="entrada", required)
+                
+                label(for="checkBox", id="checkboxLabel")
+                    input(type="checkbox" id="checkBox" name="marcador")
+                    |  Show passwords
+
+                button(type="submit", class="btn") Sign In
+        script.
+            // Medio para poder mostrar la contraseña
+            const isSelected = document.getElementById("checkBox");
+            const pwd = document.getElementById("contrasenia");
+            const pwdConfirm = document.getElementById("confirmPassword");
+            // Evento cuando se tenga un click
+            isSelected.addEventListener('click', () => {
+                if(pwd.type === 'password' && pwdConfirm.type === 'password'){
+                    pwd.type = 'text';
+                    pwdConfirm.type = 'text';
+                } else { 
+                    pwd.type = 'password';
+                    pwdConfirm.type = 'password';
+                }
+            });

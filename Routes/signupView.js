@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     const alerta = {
         icon: 'sick',
         title: 'Mamarre',
-        msn: 'Como lo mueve esa muchachota.'
+        msg: 'Como lo mueve esa muchachota.'
     }; 
     res.render('sign_up',{alerta:alerta});
 });

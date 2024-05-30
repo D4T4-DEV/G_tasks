@@ -4,11 +4,13 @@ html(lang="es")
         title Sign up
         link(rel='stylesheet', href='/css/signUpStyle.css')
         link(rel='stylesheet', href='/css/globalStyle.css')
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/alertStyle.css")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        
     body
 
-        //- Alertas
+        //- Alerta
         if alerta
             include Frag/alertasCarcasa.pug 
 
@@ -20,13 +22,13 @@ html(lang="es")
             h2.titulo Sign Up
             form(action="/signup-new-user" class="formulario" method='POST')
                 label(for="usuario" class="etiqueta-form") Username
-                input(type="text", placeholder="Username", id="usuario", name="usuario", class="entrada", required)
+                input(type="text", placeholder="Username", id="usuario", name="username", class="entrada", required)
 
                 label(for="correo" class="etiqueta-form") Email
-                input(type="text", placeholder="Email", id="correo", name="correo", class="entrada", required)
+                input(type="text", placeholder="Email", id="correo", name="email", class="entrada", required)
                 
                 label(for="contrasenia" class="etiqueta-form") Password
-                input(type="password", placeholder="Password", id="contrasenia", name="contrasenia", class="entrada", required)
+                input(type="password", placeholder="Password", id="contrasenia", name="pwd", class="entrada", required)
 
                 label(for="confirmPassword" class="etiqueta-form") Confirm Password
                 input(type="password", placeholder="Confirm Password", id="confirmPassword", name="confirmPassword", class="entrada", required)

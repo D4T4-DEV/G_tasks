@@ -11,6 +11,7 @@ const loginView = require('./loginView');
 
 // Ruta del signup
 const signupView = require('./signupView');
+const signupP = require('./signup');
 
 // Ruta de la pantalla principal
 const pPrincipalView = require('./indexView');
@@ -34,9 +35,11 @@ router.use('/', loginView);
 
 // Configuracion del sigup
 router.use('/sign-up', signupView);
+router.use('/signup-new-user', signupP);
+
 
 // Configuracion de la pantalla principal
-router.use('/principal', pPrincipalView);
+router.use('/tasks', pPrincipalView);
 
 // Configuracion de la pantalla de myCreatedTask
 router.use('/created-tasks', pMyCreatedTask);

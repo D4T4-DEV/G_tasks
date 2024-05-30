@@ -9,13 +9,11 @@ const router = express.Router();
 
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
-
     const alerta = {
         icon: 'sick',
-        title: 'Connection error',
-        msn: 'Can not connect to server.'
-    };
-
+        title: 'Mamarre',
+        msg: 'Como lo mueve esa muchachota.'
+    }; 
     res.render('login', {alerta: alerta});
 });
 

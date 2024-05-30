@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     const alerta = {
         icon: 'sick',
         title: 'Connection error',
-        msn: 'Can not connect to server.'
+        msg: 'Can not connect to server.'
     };
 
 

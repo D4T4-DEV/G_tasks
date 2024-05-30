@@ -1,26 +1,22 @@
-//- Para estilizar esto usa "alertStyle"
+//- Para estilizar esto usa 
+        "alertStyle"
+    Junto con 
+        https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200
+    
+    Ejemplo:
+        link(rel="stylesheet", href="/css/alertStyle.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200")
+
 div#alerta 
     .cont-alert 
         span(class="material-symbols-outlined" id='icon-error') #{alerta.icon}
     
         .cont-text
             p#titulo-error #{alerta.title}
-            span#mensaje #{alerta.msn}
+            span#mensaje #{alerta.msg}
             span#cerrar-notificacion &times
 //-Script para mostrar la notificacion
 script.
-
-    // Agregacion del elemento a la cabecera *ENLACE DE LOS ICONOS*
-    const linkGoogleIncons = document.createElement('link');
-    linkGoogleIncons.rel = 'stylesheet';
-    linkGoogleIncons.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200';
-    document.head.appendChild(linkGoogleIncons);
-
-    // Agregacion de su hojas de estilos
-    const linkStyleCSS = document.createElement('link');
-    linkStyleCSS.rel = 'stylesheet';
-    linkStyleCSS.href = '/css/alertStyle.css';
-    document.head.appendChild(linkStyleCSS);
 
     const divAlert = document.getElementById("alerta");
     const closeAlert = document.getElementById("cerrar-notificacion");

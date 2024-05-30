@@ -18,7 +18,7 @@ router.post( '/', async (req, res) => {
         await userController.signUpUser(username, email, password_hash);
 
         // Usuario insertado correctamente
-        res.redirect('/login');
+        res.redirect('/');
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Error interno del servidor');

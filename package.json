@@ -8,7 +8,7 @@
     "sass-watch": "sass -w Styles/Sass/:Public/css/",
     "nodemon-watch": "nodemon app.js",
     "start": "npm-run-all --parallel sass-watch nodemon-watch",
-    "dp": "npm i axios bcrypt dotenv express jsonwebtoken pug sass & npm i nodemon npm-run-all -D"
+    "dp": "npm i axios bcrypt dotenv express jsonwebtoken pug sass express-session passport passport-local cookie-parser & npm i nodemon npm-run-all -D"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +16,13 @@
   "dependencies": {
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "pug": "^3.0.3",
     "sass": "^1.77.3"
   },

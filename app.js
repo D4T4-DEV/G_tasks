@@ -2,8 +2,34 @@
     // express
 const express = require('express');
 const app = express();
+    // Dotenv
+const dotenv = require('dotenv'); // Aspecto para poder tomar las variables de entorno
+dotenv.config();
     // Path
 const path = require('path');
+    // Express-session
+const session = require('express-session');
+    // Passport
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+    // CookieParser
+const cookieParser = require('cookie-parser');
+
+
+// Middleware para gestionar las cookies
+app.use(cookieParser());
+
+// Middleware para crear sesiones
+app.use(session({
+  secret: process.env.ACCESS_TOKEN_SECRET, // Palabra que se usara para cifrar las sesiones
+  resave: false,
+  saveUninitialized: false,
+  //store: -> Esto lo podemos poner para poder guardar las sesion en un lugar por el momento no
+}));
+
+// Configurar Passport.js
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Configuración de la plantilla Pug

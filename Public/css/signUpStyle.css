@@ -95,7 +95,8 @@
 }
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .cont-signup {
-    max-width: 80%;
+    max-width: 70%;
+    height: 525px;
   }
 }
 

@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Ruta de login
 const loginView = require('./loginView'); 
+const loginP = require('./login');
 
 // Ruta del signup
 const signupView = require('./signupView');
@@ -32,6 +33,7 @@ router.use('/get-state-notif', getDataNotifications);
 
 // Configuracion login
 router.use('/', loginView);
+router.use('/sign-in-login', loginP);
 
 // Configuracion del sigup
 router.use('/sign-up', signupView);

@@ -12,6 +12,20 @@ const { extractDataNotification, createNotification } = require('../Models/notif
 // Ruta de registrar usuario
 router.post('/', async (req, res) => {
     const { username, email, pwd, confirmPassword } = req.body;
+    const emailRegex = /^[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}$/; // REGEX para comparar el correo
+
+    // Notificaciones por cualidades erroneas en el formulario
+    if(!emailRegex.test(email) && (pwd !== confirmPassword)){
+        // Aviso cuando el email no es valido
+        req.session.alert = createNotification('text_fields', 'Oh no...', `Please verify the data entered`);
+        return res.redirect('/sign-up');
+    }
+
+    if(!emailRegex.test(email)){
+        // Aviso cuando el email no es valido
+        req.session.alert = createNotification('email', 'Oh no...', `The email entered is not valid`);
+        return res.redirect('/sign-up');
+    }
 
     if (pwd !== confirmPassword) {
         // Aviso cuando las contraseñas no coinciden
@@ -21,6 +35,7 @@ router.post('/', async (req, res) => {
 
     // Interaccion con la API
     try {
+
         var password_hash = await security.getHash(pwd);
         // Pasamos los datos al controlador para que este se comunique en la API
         notify = await userController.signUpUser(username, email, password_hash);
@@ -29,8 +44,14 @@ router.post('/', async (req, res) => {
         if (notify.status === 200) {
             req.session.alert = extractDataNotification(notify.data);
         }
+
+        if (notify.status === 201) {
+            req.session.alert = extractDataNotification(notify.data);
+            return res.redirect('/sign-up');
+        }
         // Usuario insertado correctamente
         res.redirect('/');
+
     } catch (error) {
         if (error.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos

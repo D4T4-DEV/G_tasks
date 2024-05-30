@@ -35,8 +35,14 @@ async function getHash(passwordNotEncr) {
     return password_hash;
 }
 
+// Función para generar un token JWT
+function generateToken(data, expirationTime) {
+    // Se firma el token utilizando el algoritmo RS256 y la clave privada RSA del entorno
+    return jwt.sign({ data }, process.env.RSA_PRIVATE_KEY, { algorithm: 'RS256', expiresIn: expirationTime });
+}
 
 module.exports={
     encryptData,
-    getHash
+    getHash,
+    generateToken
 };

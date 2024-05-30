@@ -15,6 +15,9 @@ const LocalStrategy = require('passport-local').Strategy;
     // CookieParser
 const cookieParser = require('cookie-parser');
 
+// FUNCIONES PROPIAS Y DEMAS
+const userController = require('./Controllers/userController');
+
 
 // Middleware para gestionar las cookies
 app.use(cookieParser());
@@ -31,6 +34,36 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// CONFIGURACION DE PASSPORT para tokens
+passport.use(new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'pwd',
+},
+  async (username, pwd, done) => {
+    // ASPECTOS QUE HARA LA VERIFICACION
+    try{
+      var userData = userController.logInUser(username, pwd);
+
+      // Si no trajo nada :(
+        if (!userData) {
+          avisoLogin = "Por favor verifica las credenciales ingresadas en el LOCALSTRATEGY";
+          console.log("Se ha experimentado este error: credenciales incorrectas" + "\n");
+          return done(null, false);
+        }
+        return done(null, userData);
+    } catch (err) {
+      return done(null, false); // Manejamos este error por consola debido a que si no esta el server la aplicacion muere
+    }
+  }
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser(async (user, done) => {
+  done(null, user);
+});
 
 // Configuración de la plantilla Pug
 app.set('view engine', 'pug');
@@ -47,30 +80,6 @@ app.use(express.json()); // -> Entender datos en Formato JSON
 //Rutas 
 const router = require("./Routes/routes");
 app.use('/', router); // Seteo de rutas puestas en el archivo de ROUTES
-
-
-// Prueba del formulario
-app.post('/create-new-task', (req, res) => {
-  // Extraer los datos del cuerpo de la solicitud
-  const title = req.body.title;
-  const user = req.body.user;
-  const taskRespon = req.body['task-responsibility'];
-  const instructions = req.body.instructions;
-  const deadline = req.body['date-finish'];
-
-
-  // Imprimimos en consola
-  console.log('Title:', title);
-  console.log('User:', user);
-  console.log('Responsability', taskRespon);
-  console.log('Instructions:', instructions);
-  console.log('Deadline:', deadline);
-
-  // Respuesta generica
-  res.send('Tarea creada correctamente');
-});
-
-
 
 // Inicializacion del puerto que será ejecutado el server local
 const PORT = 3000;

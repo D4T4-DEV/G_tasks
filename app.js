@@ -81,6 +81,36 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// Midleware para cerrar sesion
+app.get('/logout', async (req, res) => {
+
+  await req.logout(async (err) => {
+    if (err) {
+      avisoCerrarSesion = "Error al cerrar sesión, por favor intentelo nuevamente..."
+      console.error('Error al cerrar la sesión:', err + "STATUS: 500");
+    }
+    await req.session.destroy((err) => {
+      if (err) {
+        console.error('Error al destruir la sesión:', err + "STATUS: 500");
+        avisoCerrarSesion = "Error al cerrar sesión, por favor intentelo nuevamente..."
+      }
+      console.log('ESTE PROCESO -> req.session.destroy -> ha finalizado correctamente');
+      avisoCerrarSesion = "Se ha cerrado sesión";
+    });
+
+    // Varificamos que:
+      // -> Cerrar seión contenga un valor (Deberia ser si o si FALSE)
+      // -> usuarioID exista (este viene en la sesion al loguearse)
+    // si no se cumple solo quitamos la sesion y listo
+    // if(CerrarSesion === undefined && usuarioID != undefined){
+    //   await updateLog_Out(usuarioID);
+    // }
+    // usuarioID = undefined;
+    // CerrarSesion = undefined;
+    res.clearCookie('token');
+    res.redirect('/'); // Redirigir a la página principal u otra página de tu elección
+  });
+});
 
 // MIDLEWARE PERSONALIZADO
 // Middleware personalizado para variables de sesion y cookies

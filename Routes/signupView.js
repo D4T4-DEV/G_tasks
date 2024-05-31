@@ -10,7 +10,6 @@ const router = express.Router();
 // Ruta de renderizado de la vista 
 router.get('/', (req, res) => {
     var alert = req.session.alert;
-    console.log(alert);
     delete req.session.alert;
 
     res.render('sign_up', { alerta: alert });

@@ -1,22 +1,29 @@
 // INICIALIZACION DE LIBRERIAS 
-    // express
+// express
 const express = require('express');
 const app = express();
-    // Dotenv
+// Dotenv
 const dotenv = require('dotenv'); // Aspecto para poder tomar las variables de entorno
 dotenv.config();
-    // Path
+// Path
 const path = require('path');
-    // Express-session
+// Express-session
 const session = require('express-session');
-    // Passport
+// Passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-    // CookieParser
+// CookieParser
 const cookieParser = require('cookie-parser');
 
 // FUNCIONES PROPIAS Y DEMAS
 const userController = require('./Controllers/userController');
+
+const security = require('./Models/autenticator/autenticator');
+const {createNotification} = require('./Models/notificacionesModel'); // Aspecto para crear notificaciones
+
+
+// VARIABLES
+var notifyLogin = undefined;
 
 
 // Middleware para gestionar las cookies
@@ -40,22 +47,54 @@ passport.use(new LocalStrategy({
   passwordField: 'pwd',
 },
   async (username, pwd, done) => {
-    // ASPECTOS QUE HARA LA VERIFICACION
-    try{
-      var userData = userController.logInUser(username, pwd);
+    // ASPECTOS QUE HARA LA VERIFICACION 
+    try {
+      var userOrNoty = await userController.logInUser(username, pwd);
 
-      // Si no trajo nada :(
-        if (!userData) {
-          avisoLogin = "Por favor verifica las credenciales ingresadas en el LOCALSTRATEGY";
-          console.log("Se ha experimentado este error: credenciales incorrectas" + "\n");
-          return done(null, false);
-        }
-        return done(null, userData);
+      // Verificamos que los datos de la respuesta no sea una notificacion
+      if (userOrNoty.icon) {
+        console.log("Vino consigo una notificacion de la API\n");
+        notifyLogin = userOrNoty;
+        throw error
+      } else {
+        // Si no trajo nada :( o la api no esta funcionando
+        // if (!userOrNoty) {
+        //   notifyLogin = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
+        //   console.log("Se ha experimentado este error: credenciales incorrectas\n");
+        //   return done(null, false);
+        // }
+        return done(null, userOrNoty);
+      }
     } catch (err) {
+      if (err.response) {
+        // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
+        notifyLogin = err.response.data;
+      }
+
+      // Si no tiene nada en un error con datos de la API (Se da por hecho que no esta en linea) y se procede
+      if(notifyLogin === undefined){
+        notifyLogin = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
+      }
+
       return done(null, false); // Manejamos este error por consola debido a que si no esta el server la aplicacion muere
     }
   }
 ));
+
+
+// MIDLEWARE PERSONALIZADO
+// Middleware personalizado para variables de sesion y cookies
+app.use((req, res, next) => {
+  // ALERTA DE PASPORT
+
+
+  if(notifyLogin != undefined){
+    req.session.alert = notifyLogin;
+    notifyLogin = undefined;
+  }
+
+  next(); // Damos paso a la ejecucion de otros middlewares
+});
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -79,6 +118,7 @@ app.use(express.json()); // -> Entender datos en Formato JSON
 
 //Rutas 
 const router = require("./Routes/routes");
+const { error } = require('console');
 app.use('/', router); // Seteo de rutas puestas en el archivo de ROUTES
 
 // Inicializacion del puerto que será ejecutado el server local

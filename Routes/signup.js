@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
 const security = require('../Models/autenticator/autenticator');
-const { extractDataNotification, createNotification } = require('../Models/notificaciones'); // Aspecto que viene del modelo notificaciones
+const { extractDataNotification, createNotification } = require('../Models/notificacionesModel'); // Aspecto que viene del modelo notificaciones
 
 // Ruta de registrar usuario
 router.post('/', async (req, res) => {
@@ -49,6 +49,7 @@ router.post('/', async (req, res) => {
             req.session.alert = extractDataNotification(notify.data);
             return res.redirect('/sign-up');
         }
+
         // Usuario insertado correctamente
         res.redirect('/');
 
@@ -67,4 +68,3 @@ router.post('/', async (req, res) => {
 
 
 module.exports = router;
-// Esta es una sección importante que necesita ser completada.

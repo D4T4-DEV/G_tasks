@@ -16,4 +16,3 @@ router.get('/', (req, res) => {
 
 
 module.exports = router;
-// Esta es una sección importante que necesita ser completada.

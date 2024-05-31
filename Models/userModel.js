@@ -7,10 +7,9 @@ const noti = require('./notificacionesModel');
 
 // Clase para almanacenar datos
 class User{
-    constructor(id, username, pwd_hash){
+    constructor(id, username){
         this.id = id;
         this.username = username;
-        this.pwd_hash = pwd_hash;
     }
 }
 
@@ -29,10 +28,11 @@ async function loginUser(dataSecurity){
         // Esperamos una respuesta
         const response = await axios.post(`${process.env.BASE_URL}/users//login-user`, {dataSecurity});
 
+
         if(response.data.userID === undefined){
             return noti.extractDataNotification(response.data);
         }else{
-            return new User(response.data.userID, response.data.username, response.data.pwd_hash);
+            return new User(response.data.userID, response.data.username);
         }
     } catch (err) {
         console.error('Error al loguear al usuario (MODEL): posiblemente la api tenga un fallo o este caida');

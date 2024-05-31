@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox con ID y Nombre de Usuario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.user-checkbox {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.user-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.user-checkbox label {
+    font-size: 16px;
+    color: #333;
+}
+
+.user-checkbox input[type="checkbox"]:checked + label {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+    </style>
+    <div class="user-checkbox">
+        <input type="checkbox" id="user1" value="1">
+        <label for="user1">Juan Pérez</label>
+    </div>
+    <div class="user-checkbox">
+        <input type="checkbox" id="user2" value="2">
+        <label for="user2">María López</label>
+    </div>
+    <div class="user-checkbox">
+        <input type="checkbox" id="user3" value="3">
+        <label for="user3">Carlos Gómez</label>
+    </div>
+</body>
+</html>

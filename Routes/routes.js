@@ -32,7 +32,7 @@ router.use('/get-state-notif', getDataNotifications);
 
 
 // Configuracion login
-router.use('/', loginView);
+router.use('/', pPrincipalView);
 router.use('/sign-in-login', loginP);
 
 // Configuracion del sigup

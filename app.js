@@ -86,8 +86,6 @@ passport.use(new LocalStrategy({
 // Middleware personalizado para variables de sesion y cookies
 app.use((req, res, next) => {
   // ALERTA DE PASPORT
-
-
   if(notifyLogin != undefined){
     req.session.alert = notifyLogin;
     notifyLogin = undefined;

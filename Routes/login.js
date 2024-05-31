@@ -24,7 +24,7 @@ router.post('/', passport.authenticate('local', {
         res.cookie('token', token, { httpOnly: true, secure: false });
 
         // Usuario correctamente logueado
-        res.redirect('/index');
+        res.redirect('/dashboard');
 
     } catch (error) {
         if (error.response) {

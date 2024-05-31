@@ -1,0 +1,116 @@
+button(type="button" id='myBtn') Open Modal
+
+div(class='modal' id='Modal-bkg')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-cls') &times
+        h1.title New task
+        .cont-form
+            form(action="/create-new-task" class="formulario" method='POST' autocomplete="off")
+                .cont-firs
+                    h2.subt-title Data general task
+
+                    label(class="etiqueta-form") Title task
+                    input(type="text", placeholder="Title", name="title", class="entrada", required)
+
+                    label(class="etiqueta-form") Responsible user 
+                    select(name="user", class="entrada user-select", required) 
+                        //- Esto cambialo de manera nativa
+                        option(value="1" class='option-s') Manuel 
+                        option(value="2" class='option-s') David  
+
+
+                    label(class="etiqueta-form") Task description
+                    textarea(name="instructions" class="entrada" class='text-area', required)
+
+                    label(class="etiqueta-form") Deadline
+                    input(type="date", name="date-finish" class="entrada date-input" onkeydown="return false" required)
+                    .cont-next 
+                        span(class="material-symbols-outlined" id='btn-next') arrow_back
+                .cont-second
+                    .cont-back 
+                        span(class="material-symbols-outlined" id='btn-bck') arrow_back
+                    h2.subt-title Users in this task
+
+                    label(class="etiqueta-form") Responsible user 
+                    select(name="user", class="entrada user-select", required) 
+                        //- Esto cambialo de manera nativa
+                        option(value="1" class='option-s') Manuel 
+                        option(value="2" class='option-s') David  
+
+                    button(type="submit", class="btn" id='btn-cambio') Add task
+script. 
+        // Animacion del modal para abrirlo
+        document.getElementById('myBtn').addEventListener('click', () => {
+            const modal = document.getElementById("Modal-bkg");
+            modal.classList.add('show');
+            modal.classList.remove('hide');
+            modal.style.display = 'block';
+        });
+
+        // Evento para cerrar el modal
+        document.getElementById('btn-cls').addEventListener('click', () => {
+            const modal = document.getElementById("Modal-bkg");
+
+            // Primer contenedor
+            const primeraPartForm = document.querySelector('.cont-firs'); // Aspectos del div
+            // Segundo contenedor
+            const segundaPartForm = document.querySelector('.cont-second');
+            //- segundaPartForm.style.display = "none";
+            
+            modal.classList.add('hide');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // Cambios del contenedores
+                primeraPartForm.style.display = "flex";
+                segundaPartForm.style.display = "none";
+            }, 200);
+
+            setTimeout(()=>{
+
+            },400);
+        });
+
+        // Evneto para mostrar la siguiente parte del formulario
+        document.getElementById('btn-next').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs'); // Aspectos del div
+            primeraParteForm.style.display = "none";
+
+            const primeraSegundoForm = document.querySelector('.cont-second');
+            primeraSegundoForm.style.display = "flex";
+        });
+
+        // Evento para volver al anterior parte del formulario
+        document.getElementById('btn-bck').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs'); // Aspectos del div
+            primeraParteForm.style.display = "flex";
+
+            const btn = document.getElementById('btn-cambio');
+            btn.textContent = "Select users";
+
+            const primeraSegundoForm = document.querySelector('.cont-second');
+            primeraSegundoForm.style.display = "none";
+        });
+
+        // Establecer la fecha máxima del input a la fecha actual
+        document.querySelector('.date-input').min = obtenerFechaActual();
+
+        // Formatea la fecha actual en formato yyyy-mm-dd
+        function obtenerFechaActual() {
+            const today = new Date();
+            var day = today.getDate();
+            var month = String(today.getMonth() + 1);
+            const year = today.getFullYear();
+
+            // Medio para poderle poner un cero antes si es un numero de 1-9, que tenga 01-09
+            if(month < 10){
+                month = '0' + month;
+            }
+            // Medio para poderle poner un cero antes si es un numero de 1-9, que tenga 01-09
+            if(day < 10){
+                day = '0' + day;
+            }
+
+            return `${year}-${month}-${day}`;
+        }

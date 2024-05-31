@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     };
 
 
-    res.render('index', {alerta: alerta});
+    res.render('dashboard', {alerta: alerta});
 });
 
 

@@ -1,0 +1,251 @@
+@import 'colorPalette'
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
+
+.modal 
+    display: none
+    position: fixed
+    z-index: 1
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    overflow: auto
+    background-color: rgb(0,0,0)
+    background-color: rgba(0,0,0,0.4)
+
+.cont-modal 
+    display: flex
+    flex-direction: column
+    background-color: #fff
+    margin: 4% auto
+    padding: 20px
+    border: solid 2px #D4D4D8
+    border-radius: 8px
+    width: 30%
+    animation-duration: 0.4s
+    animation-timing-function: ease
+
+/* Animaciones */
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@keyframes fadeOut
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+@keyframes slideIn
+  from
+    transform: translateY(-50px)
+    opacity: 0
+  to
+    transform: translateY(0)
+    opacity: 1
+
+@keyframes slideOut
+  from
+    transform: translateY(0)
+    opacity: 1
+  to
+    transform: translateY(-50px)
+    opacity: 0
+
+
+.modal.show .cont-modal 
+    animation-name: slideIn, fadeIn
+
+
+.modal.hide .cont-modal 
+    animation-name: slideOut, fadeOut
+
+
+.cont-close-btn
+    display: flex
+    justify-content: flex-end
+
+#btn-cls
+    display: block
+    cursor: pointer
+    font-size: 23px
+    color: $kumera-950
+    font-weight: bolder
+    text-align: right
+
+.cont-back
+    display: flex
+    justify-content: flex-start
+
+.cont-next 
+    display: flex
+    justify-content: flex-end
+
+#btn-bck
+    display: block
+    cursor: pointer
+    font-size: 23px
+    color: $kumera-700
+    text-align: left
+    margin-bottom: 12px
+
+#btn-next
+    display: inline-block
+    transform: rotate(180deg)
+    cursor: pointer
+    font-size: 23px
+    color: $kumera-700
+    text-align: left
+    margin-bottom: 12px
+
+.title
+  font-family: "Poetsen One", sans-serif
+  color: $kumera-950
+  font-size: 30px
+  text-align: center
+  margin-bottom: 12px
+
+.subt-title
+    margin: 0
+    margin-bottom: 8px
+    font-size: 18px
+    font-family: "Poetsen One", sans-serif
+
+.cont-form
+    display: flex
+    justify-content: center
+
+
+// Estilo del contenedor
+.cont-form
+  color: $kumera-950
+  width: 100%
+  max-width: 600px
+  margin: 0 auto
+
+// Estilo del titulo
+.titulo 
+    font-family: "Poetsen One", sans-serif
+    text-align: center
+    color: $kumera-950
+    margin-bottom: 5px
+    
+// Estilo del formulario
+.formulario 
+    display: flex
+    flex-direction: column
+    width: 70%
+
+.cont-firs
+    display: flex
+    flex-direction: column
+    width: 100%
+
+.cont-second
+    display: none
+    flex-direction: column
+    width: 100%
+
+// Estilo para los labels
+.etiqueta-form
+    margin-bottom: 6px
+    font-family: "Nunito", sans-serif
+    font-weight: bold
+
+// Estilo para los inputs
+.entrada
+    font-family: "Nunito", sans-serif
+    width: auto
+    padding: 1.5%
+    margin-bottom: 12px
+    border: 1px solid $kumera-700
+    border-radius: 4px
+    transition: border-color 0.3s ease-in-out
+    color: $kumera-950
+    font-size: 13px
+    font-weight: bold
+
+.entrada:focus
+    border-color: $kumera-600
+
+#date-finish
+    color: $kumera-600
+
+// Estilo del btn
+.btn
+    background-color: $kumera-800
+    padding: 8px
+    width: 100%
+    text-align: center
+    border-radius: 8px
+    color: #FFF
+    font-family: "Poetsen One", sans-serif
+    font-size: 20px
+    transition: background-color 0.3s ease
+    border: none
+    cursor: pointer
+
+    &:hover
+        background-color: $kumera-700
+
+.atras
+    text-decoration: none
+    color: $kumera-700
+    font-weight: bolder
+
+.text-area
+    background-color: transparent
+    height: 200px
+    resize: none
+    color: $kumera-950
+    font-family: "Nunito", sans-serif
+    font-size: 13px
+    border: 1px solid $kumera-700
+    border-radius: 5px
+    padding: 10px
+    letter-spacing: 0.1em
+    overflow-x: hidden
+    font-weight: bold
+
+    &::-webkit-scrollbar
+        width: 8px
+
+    &::-webkit-scrollbar-thumb
+        background: rgba($kumera-500, 0.5)
+        border-radius: 2px
+
+.option-s
+    font-size: 14px
+    font-family: "Nunito", sans-serif
+    
+
+//Media Querys
+
+//Dispositivos moviles
+@media only screen and (max-width: 600px)
+    .cont-form 
+        width: 100%
+
+    .cont-modal
+        width: 70%
+
+    .formulario
+        width: 100%
+
+// Tabletas 
+@media only screen and (min-width: 601px) and (max-width: 1024px)
+
+    .cont-modal
+        width: 50%
+
+// Desktops
+@media only screen and (min-width: 1025px)
+    .cont-modal
+        width: 40%
+
+
+
+    

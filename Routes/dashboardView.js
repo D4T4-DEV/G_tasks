@@ -6,6 +6,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
+const taskController = require('../Controllers/tasksController');
 const {organizeByAlphabet} = require('../Models/OrganizadorInfo/organiceDataUser');
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
 
@@ -15,12 +16,15 @@ router.get('/', async (req, res) => {
     var username = undefined;
     var dataAllUsers = undefined;
     var alert = req.session.alert;
+    const token = req.cookies.token;
     delete req.session.alert;
 
     try {
-
         username = req.user.username;
-        dataAllUsers = await userController.getAllDataUsers(req.cookies.token);
+        dataAllUsers = await userController.getAllDataUsers(token);
+        const task = await taskController.getMyTaskAssigned(username, token);
+
+        // console.log(task);
 
         var dataOrgani = organizeByAlphabet(dataAllUsers);
         res.render('dashboard', {alerta: alert,user: username, userData: dataOrgani});

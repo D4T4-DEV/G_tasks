@@ -30,8 +30,6 @@ router.post('/', async (req, res) => {
 
     try {
         var respon = await taskController.createNewTask(owner, title, userRespons, descrip, date_finish, users, req.cookies.token);
-
-
         req.session.alert = extractDataNotification(respon);
         return res.redirect('/dashboard');
     } catch (err) {

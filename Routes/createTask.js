@@ -12,24 +12,24 @@ const { extractDataNotification, createNotification } = require('../Models/notif
 // Ruta de renderizado de la vista 
 router.post('/', async (req, res) => {
     const { title, userRespons, descrip, date_finish, user_respon } = req.body;
-
+    var owner = req.user.id;
     var users = '';
 
-    // Si no selecciono ninguno se encontrara como un '' -> si existira
+    // Si no selecciono ninguno se encontrara como un '' -> si existira, pero no sera nada
     if(user_respon !== undefined){
 
         // Verificamos que sea un array que obtenemos de la selecicon de opciones
         if (Array.isArray(user_respon)) {
             user_respon.forEach(userID => {
-                users += userID + ', '; // Agregamos la coma y espacio 
+                users += userID + ', '; // Agregamos la coma y espacio para poder tener un medio para filtrar en BD
             });
         } else {
             users = user_respon;
         }
     }
-    
+
     try {
-        var respon = await taskController.createNewTask(title, userRespons, descrip, date_finish, users, req.cookies.token);
+        var respon = await taskController.createNewTask(owner, title, userRespons, descrip, date_finish, users, req.cookies.token);
 
 
         req.session.alert = extractDataNotification(respon);

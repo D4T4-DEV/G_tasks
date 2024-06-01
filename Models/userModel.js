@@ -51,7 +51,6 @@ async function getAllDataUsers(token) {
         const response = await axios.get(`${process.env.BASE_URL}/users/getAllUsers`, axiosConfig);
         // Comprobamos de los multiples usuarios existe este campo
         if (response.status === 201) {
-            console.log("Estamos aqui")
             return noti.extractDataNotification(response.data);
         } else {
             return response.data.map(dt => new User(dt.userID, dt.username));

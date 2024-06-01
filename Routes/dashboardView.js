@@ -14,13 +14,16 @@ router.get('/', async (req, res) => {
 
     var username = undefined;
     var dataAllUsers = undefined;
+    var alert = req.session.alert;
+    delete req.session.alert;
 
     try {
+
         username = req.user.username;
         dataAllUsers = await userController.getAllDataUsers(req.cookies.token);
 
         var dataOrgani = organizeByAlphabet(dataAllUsers);
-        res.render('dashboard', {user: username, userData: dataOrgani});
+        res.render('dashboard', {alerta: alert,user: username, userData: dataOrgani});
     } catch (err) {
         if (err.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos

@@ -1,5 +1,3 @@
-button(type="button" id='myBtn') Open Modal
-
 div(class='modal' id='Modal-bkg')
     .cont-modal 
         .cont-close-btn
@@ -49,18 +47,14 @@ div(class='modal' id='Modal-bkg')
                                         each data in users
                                             if user !== data.username
                                                 li.elemnt
-                                                    label
+                                                    label.txt-label
                                                         input(type="checkbox" name="user_respon" class='chkex' value=data.id id=data.id)
                                                         | #{data.username}
-
-
-
-
 
                     button(type="submit", class="btn" id='btn-cambio') Add task
 script. 
         // Animacion del modal para abrirlo
-        document.getElementById('myBtn').addEventListener('click', () => {
+        document.getElementById('n-task').addEventListener('click', () => {
             const modal = document.getElementById("Modal-bkg");
             modal.classList.add('show');
             modal.classList.remove('hide');
@@ -79,7 +73,14 @@ script.
 
             // Valor del titulo
             const title = document.getElementById('tl');
-            console.log(title);
+            // Opciones
+            const optionRes = document.getElementById('op-users');
+            // descripcion
+            const descripTask = document.getElementById('des');
+            // fecha de entrega
+            const date = document.getElementById('dat');
+            // Los usuarios responsables
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             
             modal.classList.add('hide');
             modal.classList.remove('show');
@@ -88,6 +89,16 @@ script.
                 // Cambios del contenedores
                 primeraPartForm.style.display = "flex";
                 segundaPartForm.style.display = "none";
+
+                // Cambios en los inputs 
+                title.value = ''; // titulo
+                optionRes.value = 0; // opciones de responsabilidad 
+                descripTask.value = ''; // descripcion de la tarea
+                date.value = ''; // fecha de entrega
+                // usuarios responsables
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
             }, 200);
 
             setTimeout(()=>{
@@ -108,10 +119,7 @@ script.
         document.getElementById('btn-bck').addEventListener('click', () => {
             const primeraParteForm = document.querySelector('.cont-firs'); // Aspectos del div
             primeraParteForm.style.display = "flex";
-
-            const btn = document.getElementById('btn-cambio');
-            btn.textContent = "Select users";
-
+            
             const primeraSegundoForm = document.querySelector('.cont-second');
             primeraSegundoForm.style.display = "none";
         });

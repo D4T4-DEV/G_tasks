@@ -86,16 +86,16 @@ app.get('/logout', async (req, res) => {
 
   await req.logout(async (err) => {
     if (err) {
-      avisoCerrarSesion = "Error al cerrar sesión, por favor intentelo nuevamente..."
+      notifyLogin = "Error al cerrar sesión, por favor intentelo nuevamente..."
       console.error('Error al cerrar la sesión:', err + "STATUS: 500");
     }
     await req.session.destroy((err) => {
       if (err) {
         console.error('Error al destruir la sesión:', err + "STATUS: 500");
-        avisoCerrarSesion = "Error al cerrar sesión, por favor intentelo nuevamente..."
+        notifyLogin = createNotification('sick', 'Oh no...', `Error signing out, please try again...`);
       }
       console.log('ESTE PROCESO -> req.session.destroy -> ha finalizado correctamente');
-      avisoCerrarSesion = "Se ha cerrado sesión";
+      notifyLogin = createNotification('logout', 'Logout', `The session has been closed.`);;
     });
 
     // Varificamos que:

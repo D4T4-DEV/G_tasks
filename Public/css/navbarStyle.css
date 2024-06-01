@@ -75,6 +75,8 @@
     width: 130px;
   }
   .enlace {
+    width: 80px;
+    padding: 5;
     font-size: 14px;
     margin-left: 0;
   }

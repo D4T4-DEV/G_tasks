@@ -26,9 +26,23 @@ async function signUpUser(dataSecurity){
 async function loginUser(dataSecurity){
     try {
         // Esperamos una respuesta
-        const response = await axios.post(`${process.env.BASE_URL}/users//login-user`, {dataSecurity});
+        const response = await axios.post(`${process.env.BASE_URL}/users/login-user`, {dataSecurity});
 
+        if(response.data.userID === undefined){
+            return noti.extractDataNotification(response.data);
+        }else{
+            return new User(response.data.userID, response.data.username);
+        }
+    } catch (err) {
+        console.error('Error al loguear al usuario (MODEL): posiblemente la api tenga un fallo o este caida');
+        throw err;
+    }
+}
 
+async function getAllDataUsers(){
+    try {
+        // Esperamos una respuesta
+        const response = await axios.get(`${process.env.BASE_URL}/users/getAllUsers`);
         if(response.data.userID === undefined){
             return noti.extractDataNotification(response.data);
         }else{
@@ -42,5 +56,6 @@ async function loginUser(dataSecurity){
 
 module.exports = {
     signUpUser,
-    loginUser
+    loginUser,
+    getAllDataUsers
 };

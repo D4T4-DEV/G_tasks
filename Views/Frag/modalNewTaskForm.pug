@@ -10,33 +10,77 @@ div(class='modal' id='Modal-bkg')
                 .cont-firs
                     h2.subt-title Data general task
 
-                    label(class="etiqueta-form") Title task
-                    input(type="text", placeholder="Title", name="title", class="entrada", required)
+                    //- p Created by #{user.username}
 
-                    label(class="etiqueta-form") Responsible user 
-                    select(name="user", class="entrada user-select", required) 
+                    label(class="etiqueta-form" for='tl') Title task
+                    input(type="text", placeholder="Title", name="title", id='tl', class="entrada", required)
+
+                    label(class="etiqueta-form" for='op-users') Responsible user 
+                    select(name="userRespons", class="entrada user-select" id='op-users', required) 
                         //- Esto cambialo de manera nativa
+                        option(value="0" class='options-s') Select one of these
                         option(value="1" class='option-s') Manuel 
                         option(value="2" class='option-s') David  
 
 
-                    label(class="etiqueta-form") Task description
-                    textarea(name="instructions" class="entrada" class='text-area', required)
+                    label(class="etiqueta-form" for ='des') Task description
+                    textarea(name="descrip" class="entrada" class='text-area', id='des' required)
 
-                    label(class="etiqueta-form") Deadline
-                    input(type="date", name="date-finish" class="entrada date-input" onkeydown="return false" required)
+                    label(class="etiqueta-form" for='dat') Deadline
+                    input(type="date", id='dat' name="date_finish" class="entrada date-input" onkeydown="return false" required)
                     .cont-next 
-                        span(class="material-symbols-outlined" id='btn-next') arrow_back
+                        span(class="material-symbols-outlined" id='btn-next' title="Next fields") arrow_back
                 .cont-second
                     .cont-back 
-                        span(class="material-symbols-outlined" id='btn-bck') arrow_back
+                        span(class="material-symbols-outlined" id='btn-bck' title="Go back") arrow_back
                     h2.subt-title Users in this task
 
-                    label(class="etiqueta-form") Responsible user 
-                    select(name="user", class="entrada user-select", required) 
-                        //- Esto cambialo de manera nativa
-                        option(value="1" class='option-s') Manuel 
-                        option(value="2" class='option-s') David  
+                    label.etiqueta-form Responsible user
+
+                    .cont-users-chk
+                            .cont
+
+                                    li
+                                        label
+                                            input(type="checkbox" name="user_respon" value="id1" id='id1')
+                                            | Manuel
+                                    li
+                                        label
+                                            input#id2(type="checkbox" name="user_respon" value="id2")
+                                            | Luis
+                                    li
+                                        label
+                                            input#id3(type="checkbox" name="user_respon" value="id3")
+                                            | Carlos
+                                    
+                                    li
+                                        label
+                                            input(type="checkbox" name="user_respon" value="id1" id='id1')
+                                            | Manuel
+                                    li
+                                        label
+                                            input#id2(type="checkbox" name="user_respon" value="id2")
+                                            | Luis
+                                    li
+                                        label
+                                            input#id3(type="checkbox" name="user_respon" value="id3")
+                                            | Carlos
+                            .cont
+                                li
+                                    label
+                                        input#id4(type="checkbox" name="user_respon" value="id4")
+                                        | Manuel2
+
+                                li
+                                    label
+                                        input#id5(type="checkbox" name="user_respon" value="id5")
+                                        | Luis2
+                                li
+                                    label
+                                        input#id6(type="checkbox" name="user_respon" value="id6")
+                                        | Carlos2
+
+
 
                     button(type="submit", class="btn" id='btn-cambio') Add task
 script. 
@@ -57,6 +101,10 @@ script.
             // Segundo contenedor
             const segundaPartForm = document.querySelector('.cont-second');
             //- segundaPartForm.style.display = "none";
+
+            // Valor del titulo
+            const title = document.getElementById('tl');
+            console.log(title);
             
             modal.classList.add('hide');
             modal.classList.remove('show');

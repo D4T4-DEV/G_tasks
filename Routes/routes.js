@@ -18,17 +18,18 @@ const signupP = require('./signup');
 const pPrincipalView = require('./dashboardView');
 
 // Ruta de la pantalla de "myCreatedTask"
-const pMyCreatedTask = require('./createdTaskView');
+// const createdTask = require('./createdTaskView');
 
-// Ruta de la pantalla de "newTask"
-const pNewTask = require('./createTaskView');
+// Ruta del proceso para crear una nueva tarea
+const createdTask = require('./createTask');
 
-// RUTAS para usar en AJAX
-const getDataCounterIndex = require('./solicitudesAJAX/getDataCounterIndex');
-const getDataNotifications = require('./solicitudesAJAX/getStatesNotification');
+// // RUTAS para usar en AJAX
+// const getDataCounterIndex = require('./solicitudesAJAX/getDataCounterIndex');
+// const getDataNotifications = require('./solicitudesAJAX/getStatesNotification');
+
 // Confuguracion de las rutas AJAX
-router.use('/get-counter-data', getDataCounterIndex);
-router.use('/get-state-notif', getDataNotifications);
+// router.use('/get-counter-data', getDataCounterIndex);
+// router.use('/get-state-notif', getDataNotifications);
 
 
 // Configuracion login
@@ -43,11 +44,15 @@ router.use('/signup-new-user', signupP);
 // Configuracion de la pantalla principal
 router.use('/dashboard', pPrincipalView);
 
-// Configuracion de la pantalla de myCreatedTask
-router.use('/created-tasks', pMyCreatedTask);
+// Crear una tarea
+router.use('/create-new-task', createdTask);
+
+
+// // Configuracion de la pantalla de myCreatedTask
+// router.use('/created-tasks', pMyCreatedTask);
 
 // Configuracion de la pantalla de newTask
-router.use('/new-task', pNewTask);
+// router.use('/new-task', pNewTask);
 
 
 // Exportacion del archivo

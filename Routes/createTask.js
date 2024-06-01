@@ -7,8 +7,15 @@ const express = require('express');
 const router = express.Router();
 
 // Ruta de renderizado de la vista 
-router.get('/', (req, res) => {
-    res.render('createNewTask');
+router.post('/', (req, res) => {
+    const { title, userRespons, descrip, date_finish, user_respon } = req.body;
+
+    console.log("recibi datos!");
+    console.log(title);
+    console.log(userRespons);
+    console.log(descrip);
+    console.log(date_finish);
+    console.log(user_respon);
 });
 
 

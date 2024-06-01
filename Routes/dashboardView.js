@@ -5,17 +5,22 @@
 
 const express = require('express');
 const router = express.Router();
+const userController = require('../Controllers/userController');
 
 // Ruta de renderizado de la vista 
-router.get('/', (req, res) => {
-    const alerta = {
-        icon: 'sick',
-        title: 'Connection error',
-        msg: 'Can not connect to server.'
-    };
+router.get('/', async (req, res) => {
 
+    const dataAllUsers = await userController.getAllDataUsers();
 
-    res.render('dashboard', {alerta: alerta});
+    // const alerta = {
+    //     icon: 'sick',
+    //     title: 'Connection error',
+    //     msg: 'Can not connect to server.'
+    // };
+
+    // console.log(dataAllUsers);
+
+    res.render('dashboard', {});
 });
 
 

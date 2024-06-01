@@ -25,8 +25,8 @@ async function logInUser(username, pwd){
     return await userModel.loginUser(`${userSec},${pwdSec}`);
 }
 
-async function getAllDataUsers(){
-    return await userModel.getAllDataUsers();
+async function getAllDataUsers(token){
+    return await userModel.getAllDataUsers(token);
 }
 
 module.exports = {

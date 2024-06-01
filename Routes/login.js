@@ -31,7 +31,6 @@ router.post('/', passport.authenticate('local', {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
             req.session.alert = extractDataNotification(error.response.data);
         }
-
         // Aviso generico cuando la API no esta encendida
         req.session.alert = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
         res.redirect('/');

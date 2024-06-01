@@ -6,12 +6,29 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
+const { extractDataNotification } = require('../Models/notificacionesModel');
 
 // Ruta de renderizado de la vista 
 router.get('/', async (req, res) => {
 
-    const dataAllUsers = await userController.getAllDataUsers();
+    var username = undefined;
+    var dataAllUsers = undefined;
 
+    try {
+        username = req.user.username;
+        dataAllUsers = await userController.getAllDataUsers(req.cookies.token);
+
+        if(dataAllUsers)
+
+        res.render('dashboard', {user: username, userData:dataAllUsers});
+    } catch (err) {
+        if (err.response) {
+            // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
+            req.session.alert = extractDataNotification(err.response.data);
+        }
+        res.redirect('/');
+    }
+    
     // const alerta = {
     //     icon: 'sick',
     //     title: 'Connection error',
@@ -19,8 +36,6 @@ router.get('/', async (req, res) => {
     // };
 
     // console.log(dataAllUsers);
-
-    res.render('dashboard', {});
 });
 
 

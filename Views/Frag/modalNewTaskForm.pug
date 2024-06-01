@@ -10,7 +10,7 @@ div(class='modal' id='Modal-bkg')
                 .cont-firs
                     h2.subt-title Data general task
 
-                    //- p Created by #{user.username}
+                    p.txt Owner: #{user} (YOU)
 
                     label(class="etiqueta-form" for='tl') Title task
                     input(type="text", placeholder="Title", name="title", id='tl', class="entrada", required)
@@ -19,8 +19,9 @@ div(class='modal' id='Modal-bkg')
                     select(name="userRespons", class="entrada user-select" id='op-users', required) 
                         //- Esto cambialo de manera nativa
                         option(value="0" class='options-s') Select one of these
-                        option(value="1" class='option-s') Manuel 
-                        option(value="2" class='option-s') David  
+                        each data in userData
+                            option(value=data.id, class='option-s')= data.username
+                    
 
 
                     label(class="etiqueta-form" for ='des') Task description
@@ -39,46 +40,11 @@ div(class='modal' id='Modal-bkg')
 
                     .cont-users-chk
                             .cont
-
+                                each data in userData
                                     li
                                         label
-                                            input(type="checkbox" name="user_respon" value="id1" id='id1')
-                                            | Manuel
-                                    li
-                                        label
-                                            input#id2(type="checkbox" name="user_respon" value="id2")
-                                            | Luis
-                                    li
-                                        label
-                                            input#id3(type="checkbox" name="user_respon" value="id3")
-                                            | Carlos
-                                    
-                                    li
-                                        label
-                                            input(type="checkbox" name="user_respon" value="id1" id='id1')
-                                            | Manuel
-                                    li
-                                        label
-                                            input#id2(type="checkbox" name="user_respon" value="id2")
-                                            | Luis
-                                    li
-                                        label
-                                            input#id3(type="checkbox" name="user_respon" value="id3")
-                                            | Carlos
-                            .cont
-                                li
-                                    label
-                                        input#id4(type="checkbox" name="user_respon" value="id4")
-                                        | Manuel2
-
-                                li
-                                    label
-                                        input#id5(type="checkbox" name="user_respon" value="id5")
-                                        | Luis2
-                                li
-                                    label
-                                        input#id6(type="checkbox" name="user_respon" value="id6")
-                                        | Carlos2
+                                            input(type="checkbox" name="user_respon" value=data.id id=data.id)
+                                            | #{data.username}
 
 
 

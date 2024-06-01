@@ -6,7 +6,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
-const { extractDataNotification } = require('../Models/notificacionesModel');
+const {organizeByAlphabet} = require('../Models/OrganizadorInfo/organiceDataUser');
+const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
 
 // Ruta de renderizado de la vista 
 router.get('/', async (req, res) => {
@@ -18,14 +19,15 @@ router.get('/', async (req, res) => {
         username = req.user.username;
         dataAllUsers = await userController.getAllDataUsers(req.cookies.token);
 
-        if(dataAllUsers)
-
-        res.render('dashboard', {user: username, userData:dataAllUsers});
+        var dataOrgani = organizeByAlphabet(dataAllUsers);
+        res.render('dashboard', {user: username, userData: dataOrgani});
     } catch (err) {
         if (err.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
             req.session.alert = extractDataNotification(err.response.data);
         }
+        console.log('Se registro en el dashboard para mostrarlo');
+        req.session.alert = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
         res.redirect('/');
     }
     

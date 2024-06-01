@@ -23,22 +23,21 @@ div(class='modal' id='Modal-bkg')
                                 else 
                                     option(value=data.id, class='option-s')= data.username
                     
-
-
                     label(class="etiqueta-form" for ='des') Task description
                     textarea(name="descrip" class="entrada" class='text-area', id='des' required)
 
                     label(class="etiqueta-form" for='dat') Deadline
                     input(type="date", id='dat' name="date_finish" class="entrada date-input" onkeydown="return false" required)
+
                     .cont-next 
                         span(class="material-symbols-outlined" id='btn-next' title="Next fields") arrow_back
+
                 .cont-second
                     .cont-back 
                         span(class="material-symbols-outlined" id='btn-bck' title="Go back") arrow_back
                     h2.subt-title Users in this task
 
                     label.etiqueta-form Responsible user (If you don't want any, leave it unchecked.)
-
                     .cont-users-chk
                             .cont
                                 each users, letter in userData

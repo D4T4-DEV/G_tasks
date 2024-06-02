@@ -1,0 +1,107 @@
+
+.cont-pagina
+    .cont-task
+        h1.tl-task-ad Administration
+        - const userTasks = Task.filter(task => task.taskOwnerUserID === userID);
+        - if (userTasks.length === 0)
+            .card
+                h1.title-task YEAY
+                p.fech-ent No responsibilities!
+        - else
+            each dtTask in userTasks
+                .card
+                    h1.title-task= dtTask.titleTask
+                    - const date = new Date(dtTask.deadLineTask);
+                    p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+
+    .cont-task
+        h1.tl-task To do
+        - if (tasksToDo.length === 0)
+            .card
+                h1.title-task YEAY
+                p.fech-ent No tasks!
+        - else
+            each dtTask in tasksToDo
+                .card
+                    h1.title-task= dtTask.titleTask
+                    - const date = new Date(dtTask.deadLineTask);
+                    p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+
+    .cont-task
+        h1.tl-task Doing 
+        - if (tasksDoing.length === 0)
+            .card
+                h1.title-task YEAY
+                p.fech-ent No tasks!
+        - else
+            each dtTask in tasksDoing
+                .card
+                    h1.title-task= dtTask.titleTask
+                    - const date = new Date(dtTask.deadLineTask);
+                    p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+
+    .cont-task
+        h1.tl-task Done 
+        - if (tasksDone.length === 0)
+            .card
+                h1.title-task YEAY
+                p.fech-ent No tasks!
+        - else
+            each dtTask in tasksDone
+                .card
+                    h1.title-task= dtTask.titleTask
+                    - const date = new Date(dtTask.deadLineTask);
+                    p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+
+script.
+    // cuando se esta cargando el contenido se ejecutará este
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('h1.title-task').forEach(element => {
+            // Le damos por cada elemento la comprobacion 
+            element.textContent = truncateTitle(element.textContent, 30);
+        });
+    });
+
+    // Funcion que agrega puntos si el texto es muy grande 
+    function truncateTitle(title, maxLength) {
+        // Si el titulo es mayor a este parametro
+        if (title.length > maxLength) {
+            // Toma la porcion del texto desde el inicio hasta 3 letras antes del valor especificado 
+            return title.slice(0, maxLength - 3) + '...';
+        }
+        return title;
+    }
+
+    // Obtenemos los elementos que coincidan con este medio, devuelve un arreglo con los elementos con un index
+    // Iteramos en cada uno y le asignamos el evento del click
+    document.querySelectorAll('.btn-tasks').forEach(button => {
+        
+        button.addEventListener('click', () => {
+            // Obtenemos el valor del value
+            fetch('/g-d-model/' + button.getAttribute('value')) // Ruta donde el servidor envía los datos
+            .then(response => response.json())
+            .then(data => {
+                // Aquí puedes acceder a los datos
+                console.log(data);
+                const alerta = data.alerta;
+                const userID = data.userID;
+                const user = data.user;
+                const userData = data.userData;
+                const Task = data.Task;
+                const tasksToDo = data.tasksToDo;
+                const tasksDoing = data.tasksDoing;
+                const tasksDone = data.tasksDone;
+
+                // Haz lo que necesites con estos datos
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error);
+            });
+
+
+        });
+    });

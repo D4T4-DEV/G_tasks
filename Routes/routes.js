@@ -23,12 +23,12 @@ const pPrincipalView = require('./dashboardView');
 // Ruta del proceso para crear una nueva tarea
 const createdTask = require('./createTask');
 
-// // RUTAS para usar en AJAX
-// const getDataCounterIndex = require('./solicitudesAJAX/getDataCounterIndex');
+// RUTAS para usar en AJAX
+const getDataForModal = require('./getDataForModal');
 // const getDataNotifications = require('./solicitudesAJAX/getStatesNotification');
 
 // Confuguracion de las rutas AJAX
-// router.use('/get-counter-data', getDataCounterIndex);
+router.use('/g-d-model', getDataForModal);
 // router.use('/get-state-notif', getDataNotifications);
 
 

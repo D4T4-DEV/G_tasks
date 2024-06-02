@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
 const taskController = require('../Controllers/tasksController');
-const {organizeByAlphabet} = require('../Models/OrganizadorInfo/organiceDataUser');
+const { organizeByAlphabet } = require('../Models/OrganizadorInfo/organiceDataUser');
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
 
 // Ruta de renderizado de la vista 
@@ -21,13 +21,27 @@ router.get('/', async (req, res) => {
 
     try {
         username = req.user.username;
+
+        // Obtenemos todos los datos de los usuarios
         dataAllUsers = await userController.getAllDataUsers(token);
-        const task = await taskController.getMyTaskAssigned(username, token);
 
-        // console.log(task);
+        // Devolucion de las tareas por usuario y o por ser el creador 
+        const Task = await taskController.getMyTaskAssigned(req.user.id, token);
 
-        var dataOrgani = organizeByAlphabet(dataAllUsers);
-        res.render('dashboard', {alerta: alert,user: username, userData: dataOrgani});
+        const tasksToDo = Task.filter(task => task.stateOfTask === 1 && isUserAssigned(task, req.user.id));
+        const tasksDoing = Task.filter(task => task.stateOfTask === 2 && isUserAssigned(task, req.user.id));
+        const tasksDone = Task.filter(task => task.stateOfTask === 3 && isUserAssigned(task, req.user.id));
+
+        res.render('dashboard', {
+            alerta: alert,
+            userID: req.user.id,
+            user: username,
+            userData: organizeByAlphabet(dataAllUsers),
+            Task: Task,
+            tasksToDo: tasksToDo,
+            tasksDoing: tasksDoing,
+            tasksDone: tasksDone
+        });
     } catch (err) {
         if (err.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
@@ -37,7 +51,6 @@ router.get('/', async (req, res) => {
         req.session.alert = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
         res.redirect('/');
     }
-    
     // const alerta = {
     //     icon: 'sick',
     //     title: 'Connection error',
@@ -47,6 +60,12 @@ router.get('/', async (req, res) => {
     // console.log(dataAllUsers);
 });
 
-
+// Aspectos para obtener el id si es participante
+function isUserAssigned(task, userId) {
+    const assignedUsers = task.assignedUsersID.split(',')
+        .map(id => id.trim())
+        .filter(id => id !== '');
+    return assignedUsers.includes(userId.toString());
+}
 module.exports = router;
 // Esta es una sección importante que necesita ser completada.

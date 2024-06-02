@@ -33,9 +33,27 @@
   font-family: "Poetsen One", sans-serif;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 .btn-tasks:hover {
   background-color: #79532f;
+}
+
+.cont-task {
+  height: 500px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cont-task::-webkit-scrollbar {
+  width: 8px;
+}
+.cont-task::-webkit-scrollbar-thumb {
+  background: rgba(176, 137, 66, 0.5);
+  border-radius: 2px;
 }
 
 .titulo {
@@ -48,16 +66,51 @@
   font-size: 50px;
 }
 
+.fech-ent {
+  font-family: "Nunito", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title-task {
+  font-family: "Poetsen One", sans-serif;
+  text-align: center;
+}
+
+.tl-task {
+  font-family: "Poetsen One", sans-serif;
+  position: sticky;
+  top: 0;
+  display: inline;
+  background-color: #946b36;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 8px;
+  width: 110px;
+}
+
+.tl-task-ad {
+  font-family: "Poetsen One", sans-serif;
+  position: sticky;
+  top: 0;
+  display: inline;
+  background-color: #946b36;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 8px;
+  width: 245px;
+}
+
 @media only screen and (max-width: 600px) {
   .cont-pagina {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 1200px;
+    height: 900px;
   }
   .card {
     margin-bottom: 2rem;
-    height: 500px;
+    height: 160px;
   }
   .cont-btn {
     margin-left: 0px;

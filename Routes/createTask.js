@@ -15,8 +15,8 @@ router.post('/', async (req, res) => {
     var owner = req.user.id;
     var users = '';
 
-    // Si no selecciono ninguno se encontrara como un '' -> si existira, pero no sera nada
-    if(user_respon !== undefined){
+    // Si no selecciono ninguno se encontrara como un '' -> si existira, pero no sera nada sera espacio en blanco
+    if (user_respon !== undefined) {
 
         // Verificamos que sea un array que obtenemos de la selecicon de opciones
         if (Array.isArray(user_respon)) {
@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
 
     try {
         var respon = await taskController.createNewTask(owner, title, userRespons, descrip, date_finish, users, req.cookies.token);
+
         req.session.alert = extractDataNotification(respon);
         return res.redirect('/dashboard');
     } catch (err) {

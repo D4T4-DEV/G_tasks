@@ -59,7 +59,7 @@ async function getTaskForModel(idTask, token){
     
     try {
         // Esperamos una respuesta 
-        var response = await axios.get(`${process.env.BASE_URL}/task//get-task-for-model/${idTask}`, axiosConfig);
+        var response = await axios.get(`${process.env.BASE_URL}/task/get-task-for-model/${idTask}`, axiosConfig);
         return response;
     } catch (err) {
         console.error('Error al obtener las tareas por ID una tarea (MODEL): posiblemente la api tenga un fallo o este caida');

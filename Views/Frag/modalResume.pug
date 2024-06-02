@@ -1,0 +1,83 @@
+div(class='modal' id='Modal-res')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-clsR') &times;
+        h1.title Resume
+        .cont-form
+            form(action="/create-new-task" class="formulario" method='POST' autocomplete="off")
+                .cont-firsR
+                    h2.subt-title Data general task
+
+                    p.txt(id='ownerR')
+
+                    label(class="etiqueta-form" for='tlR') Title task
+                    input(type="text", placeholder="Title", name="title", id='tlR', class="entrada", required, readonly)
+
+                    label(class="etiqueta-form" for='op-users') Responsible user 
+                    select(name="userRespons", class="entrada user-select", id='op-users', required, readonly)
+                        option(value=respUs, class='option-s' id='v-resp')
+
+                    label(class="etiqueta-form" for ='desR') Task description
+                    textarea(name="descrip", class="entrada text-area", id='desR', required, readonly)= instructionsTask
+
+                    label(class="etiqueta-form" for='datR') Deadline
+                    input(type="date", id='datR', name="date_finish", class="entrada date-input", onkeydown="return false", required, readonly)
+
+                    .cont-next 
+                        span(class="material-symbols-outlined", id='btn-nextR', title="Next fields") arrow_back
+
+                .cont-secondR
+                    .cont-back 
+                        span(class="material-symbols-outlined", id='btn-bckR', title="Go back") arrow_back
+                    h2.subt-title Users in this task
+                    .cont-users-chk
+                            .contR
+
+                    button(type="submit", class="btn", id='btn-cambio') I got it
+
+script.
+    // Animacion del modal para abrirlo
+    //- document.getElementById('btn-tasks').addEventListener('click', () => {
+    //- });
+    //- document.querySelectorAll('.btn-tasks').forEach(button => {
+    
+    //-     button.addEventListener('click', () => {
+    //-     });
+    //- });
+        
+    // Evento para cerrar el modal
+    document.getElementById('btn-clsR').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-res");
+        // Primer contenedor
+        const primeraPartForm = document.querySelector('.cont-firsR'); // Aspectos del div
+        // Segundo contenedor
+        const segundaPartForm = document.querySelector('.cont-secondR');
+        //- segundaPartForm.style.display = "none";
+        // Contenedor de los elementos checkBox
+        const contABorrarSP = document.querySelector('.contR');
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+            primeraPartForm.style.display = "flex";
+            segundaPartForm.style.display = "none";
+            contABorrarSP.innerHTML = ''; // Borramos los elementos creados en la pestaña de tasks BUSCALO
+        }, 200);
+    });
+    // Evneto para mostrar la siguiente parte del formulario
+    document.getElementById('btn-nextR').addEventListener('click', () => {
+        const primeraParteForm = document.querySelector('.cont-firsR'); // Aspectos del div
+        primeraParteForm.style.display = "none";
+        const primeraSegundoForm = document.querySelector('.cont-secondR');
+        primeraSegundoForm.style.display = "flex";
+    });
+    // Evento para volver al anterior parte del formulario
+    document.getElementById('btn-bckR').addEventListener('click', () => {
+        const primeraParteForm = document.querySelector('.cont-firsR'); // Aspectos del div
+        primeraParteForm.style.display = "flex";
+        
+        const primeraSegundoForm = document.querySelector('.cont-secondR');
+        primeraSegundoForm.style.display = "none";
+    });
+

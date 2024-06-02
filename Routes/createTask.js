@@ -12,12 +12,10 @@ const { extractDataNotification, createNotification } = require('../Models/notif
 // Ruta de renderizado de la vista 
 router.post('/', async (req, res) => {
     const { title, userRespons, descrip, date_finish, user_respon } = req.body;
-    var owner = req.user.id;
     var users = '';
 
     // Si no selecciono ninguno se encontrara como un '' -> si existira, pero no sera nada sera espacio en blanco
     if (user_respon !== undefined) {
-
         // Verificamos que sea un array que obtenemos de la selecicon de opciones
         if (Array.isArray(user_respon)) {
             user_respon.forEach(userID => {
@@ -29,7 +27,7 @@ router.post('/', async (req, res) => {
     }
 
     try {
-        var respon = await taskController.createNewTask(owner, title, userRespons, descrip, date_finish, users, req.cookies.token);
+        var respon = await taskController.createNewTask(req.user.id, title, userRespons, descrip, date_finish, users, req.cookies.token);
 
         req.session.alert = extractDataNotification(respon);
         return res.redirect('/dashboard');

@@ -13,7 +13,7 @@
                         h1.title-task= dtTask.titleTask
                         - const date = new Date(dtTask.deadLineTask);
                         p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-                        a.btn-tasks(value=`${dtTask.taskID}, 1` class='admin') Show more
+                        a.btn-tasks(value=`${dtTask.taskID}, 1`) Show more
 
                         - var stateTaskTEX = '';
                         if dtTask.stateOfTask === 1
@@ -26,7 +26,6 @@
                             - stateTaskTEX = 'Cancelled';
 
                         p.fech-ent(class=taskStateClass)= "Status: " + stateTaskTEX
-
 
     .cont-task
         h1.tl-task To do
@@ -77,13 +76,25 @@ script.
             // Le damos por cada elemento la comprobacion 
             element.textContent = truncateTitle(element.textContent, 30);
         });
-
+        // Obtenemos los elementos que coincidan con este medio, devuelve un arreglo con los elementos con un index
+        // Iteramos en cada uno y le asignamos el evento del click
         document.querySelectorAll('.btn-tasks').forEach(button => {
             button.addEventListener('click', async () => {
                 var id = button.getAttribute('value');// Obtenemos el valor del value
 
-
+                // Dividir la cadena en dos pedazos
                 const valuesID = id.split(', ');
+
+                // Para cuando esta en administrador
+                if(parseInt(valuesID[1])=== 1){
+                    try {
+                        const response = await fetch(`/g-d-model/${valuesID[0]}`);
+                        const data = await response.json();
+                        setDataForModalForEdit(data);
+                    } catch (error) {
+                        console.error('Error al obtener los datos: ', error);
+                    }
+                }
 
                 // Para cuando esta en to do
                 if(parseInt(valuesID[1])=== 2){
@@ -116,8 +127,6 @@ script.
                 //- }
             });
         });
-
-
     });
 
     // Funcion que agrega puntos si el texto es muy grande 
@@ -131,8 +140,14 @@ script.
     }
 
 
-    // Obtenemos los elementos que coincidan con este medio, devuelve un arreglo con los elementos con un index
-    // Iteramos en cada uno y le asignamos el evento del click
+    function setDataForModalForEdit(data){
+        const modal = document.getElementById("Modal-bkg-edit");
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+    }
+
+
 
     function setDataForModalForUserAsigment(data){
         const modal = document.getElementById("Modal-res");

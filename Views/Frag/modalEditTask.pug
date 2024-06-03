@@ -1,0 +1,147 @@
+div(class='modal' id='Modal-bkg-edit')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-cls-edit') &times
+        h1.title New task
+        .cont-form
+            form(action="/edit-task" class="formulario" method='POST' autocomplete="off")
+                .cont-firs-edit
+                    h2.subt-title Data general task
+
+                    p.txt Owner: #{user} (You)
+
+                    label(class="etiqueta-form" for='tl-edit') Title task
+                    input(type="text", placeholder="Title", name="title", id='tl-edit', class="entrada", required)
+
+                    label(class="etiqueta-form" for='op-users-edit') Responsible user 
+                    select(name="userRespons", class="entrada user-select" id='op-users-edit', required) 
+                        option(value="0" class='options-s') Select one of these
+                        each users, letter in userData
+                            each data in users
+                                if user === data.username
+                                    option(value=data.id, class='option-s-edit')= `${data.username} (You)`
+                                else 
+                                    option(value=data.id, class='option-s-edit')= data.username
+                    
+                    label(class="etiqueta-form" for ='des-edit') Task description
+                    textarea(name="descrip" class="entrada" class='text-area', id='des-edit' required)
+
+                    label(class="etiqueta-form" for='dat-edit') Deadline
+                    input(type="date", id='dat-edit' name="date_finish" class="entrada date-input" onkeydown="return false" required)
+
+                    .cont-next 
+                        span(class="material-symbols-outlined" id='btn-next-edit' title="Next fields") arrow_back
+
+                .cont-second-edit
+                    .cont-back 
+                        span(class="material-symbols-outlined" id='btn-bck-edit' title="Go back") arrow_back
+                    h2.subt-title Users in this task
+
+                    label.etiqueta-form Responsible user (If you don't want any, leave it unchecked.)
+                    .cont-users-chk
+                            .cont
+                                each users, letter in userData
+                                    h2.subt-title #{letter}
+                                    ul.list
+                                        each data in users
+                                            if user !== data.username
+                                                li.elemnt
+                                                    label.txt-label
+                                                        input(type="checkbox" name="user_respon" class='chkex-edit' value=data.id id=data.id)
+                                                        | #{data.username}
+                    .cont-btns
+                        button(type="submit", class="btn" id='btn-cambio') Modify task
+                        a(class="btn-del" href='/HOLA' ) Delete task
+script. 
+        // Animacion del modal para abrirlo
+        //- document.getElementById('n-task').addEventListener('click', () => {
+        //-     const modal = document.getElementById("Modal-bkg-edit");
+        //-     modal.classList.add('show');
+        //-     modal.classList.remove('hide');
+        //-     modal.style.display = 'block';
+        //- });
+
+        // Evento para cerrar el modal
+        document.getElementById('btn-cls-edit').addEventListener('click', () => {
+            const modal = document.getElementById("Modal-bkg-edit");
+
+            // Primer contenedor
+            const primeraPartForm = document.querySelector('.cont-firs-edit'); // Aspectos del div
+            // Segundo contenedor
+            const segundaPartForm = document.querySelector('.cont-second-edit');
+            //- segundaPartForm.style.display = "none";
+
+            // Valor del titulo
+            const title = document.getElementById('tl-edit');
+            // Opciones
+            const optionRes = document.getElementById('op-users-edit');
+            // descripcion
+            const descripTask = document.getElementById('des-edit');
+            // fecha de entrega
+            const date = document.getElementById('dat-edit');
+            // Los usuarios responsables
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            modal.classList.add('hide');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // Cambios del contenedores
+                primeraPartForm.style.display = "flex";
+                segundaPartForm.style.display = "none";
+
+                // Cambios en los inputs 
+                title.value = ''; // titulo
+                optionRes.value = 0; // opciones de responsabilidad 
+                descripTask.value = ''; // descripcion de la tarea
+                date.value = ''; // fecha de entrega
+                // usuarios responsables
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            }, 200);
+
+            setTimeout(()=>{
+
+            },400);
+        });
+
+        // Evneto para mostrar la siguiente parte del formulario
+        document.getElementById('btn-next-edit').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs-edit'); // Aspectos del div
+            primeraParteForm.style.display = "none";
+
+            const primeraSegundoForm = document.querySelector('.cont-second-edit');
+            primeraSegundoForm.style.display = "flex";
+        });
+
+        // Evento para volver al anterior parte del formulario
+        document.getElementById('btn-bck-edit').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs-edit'); // Aspectos del div
+            primeraParteForm.style.display = "flex";
+            
+            const primeraSegundoForm = document.querySelector('.cont-second-edit');
+            primeraSegundoForm.style.display = "none";
+        });
+
+        // Establecer la fecha máxima del input a la fecha actual
+        document.querySelector('.date-input').min = obtenerFechaActual();
+
+        // Formatea la fecha actual en formato yyyy-mm-dd
+        function obtenerFechaActual() {
+            const today = new Date();
+            var day = today.getDate();
+            var month = String(today.getMonth() + 1);
+            const year = today.getFullYear();
+
+            // Medio para poderle poner un cero antes si es un numero de 1-9, que tenga 01-09
+            if(month < 10){
+                month = '0' + month;
+            }
+            // Medio para poderle poner un cero antes si es un numero de 1-9, que tenga 01-09
+            if(day < 10){
+                day = '0' + day;
+            }
+
+            return `${year}-${month}-${day}`;
+        }

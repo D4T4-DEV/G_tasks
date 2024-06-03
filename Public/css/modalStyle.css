@@ -76,7 +76,7 @@
   justify-content: flex-end;
 }
 
-#btn-cls, #btn-clsR, #btn-clsD {
+#btn-cls, #btn-clsR, #btn-clsD, #btn-cls-edit {
   display: block;
   cursor: pointer;
   font-size: 23px;
@@ -95,7 +95,7 @@
   justify-content: flex-end;
 }
 
-#btn-bck, #btn-bckR, #btn-bckD {
+#btn-bck, #btn-bckR, #btn-bckD, #btn-bck-edit {
   display: block;
   cursor: pointer;
   font-size: 23px;
@@ -105,7 +105,7 @@
   font-weight: bolder;
 }
 
-#btn-next, #btn-nextR, #btn-nextD {
+#btn-next, #btn-nextR, #btn-nextD, #btn-next-edit {
   display: inline-block;
   transform: rotate(180deg);
   cursor: pointer;
@@ -156,13 +156,13 @@
   width: 70%;
 }
 
-.cont-firs, .cont-firsR, .cont-firsD {
+.cont-firs, .cont-firsR, .cont-firsD, .cont-firs-edit {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.cont-second, .cont-secondR, .cont-secondD {
+.cont-second, .cont-secondR, .cont-secondD, .cont-second-edit {
   display: none;
   flex-direction: column;
   width: 100%;
@@ -195,7 +195,7 @@
   color: #946b36;
 }
 
-.btn {
+.btn, .btn-del {
   background-color: #66452d;
   padding: 8px;
   width: 100%;
@@ -208,7 +208,7 @@
   border: none;
   cursor: pointer;
 }
-.btn:hover {
+.btn:hover, .btn-del:hover {
   background-color: #79532f;
 }
 
@@ -240,7 +240,7 @@
   border-radius: 2px;
 }
 
-.option-s {
+.option-s, .option-s-edit {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
 }
@@ -284,7 +284,7 @@
   margin-bottom: 2.5px;
 }
 
-.chkex {
+.chkex, .chkex-edit {
   accent-color: #946b36;
   margin-right: 2.5px;
 }
@@ -306,6 +306,14 @@
   font-size: 14px;
   font-weight: bold;
   padding: 5px;
+}
+
+.cont-btns {
+  display: flex;
+}
+
+.btn-del {
+  margin-left: 10px;
 }
 
 @media only screen and (max-width: 600px) {

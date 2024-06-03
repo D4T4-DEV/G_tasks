@@ -68,7 +68,7 @@
     display: flex
     justify-content: flex-end
 
-#btn-cls, #btn-clsR, #btn-clsD
+#btn-cls, #btn-clsR, #btn-clsD, #btn-cls-edit
     display: block
     cursor: pointer
     font-size: 23px
@@ -84,7 +84,7 @@
     display: flex
     justify-content: flex-end
 
-#btn-bck, #btn-bckR, #btn-bckD
+#btn-bck, #btn-bckR, #btn-bckD, #btn-bck-edit
     display: block
     cursor: pointer
     font-size: 23px
@@ -93,7 +93,7 @@
     margin-bottom: 12px
     font-weight: bolder
 
-#btn-next, #btn-nextR, #btn-nextD
+#btn-next, #btn-nextR, #btn-nextD, #btn-next-edit
     display: inline-block
     transform: rotate(180deg)
     cursor: pointer
@@ -141,12 +141,12 @@
     flex-direction: column
     width: 70%
 
-.cont-firs, .cont-firsR, .cont-firsD
+.cont-firs, .cont-firsR, .cont-firsD, .cont-firs-edit
     display: flex
     flex-direction: column
     width: 100%
 
-.cont-second, .cont-secondR, .cont-secondD
+.cont-second, .cont-secondR, .cont-secondD, .cont-second-edit
     display: none
     flex-direction: column
     width: 100%
@@ -177,7 +177,7 @@
     color: $kumera-600
 
 // Estilo del btn
-.btn
+.btn, .btn-del
     background-color: $kumera-800
     padding: 8px
     width: 100%
@@ -219,7 +219,7 @@
         background: rgba($kumera-500, 0.5)
         border-radius: 2px
 
-.option-s
+.option-s, .option-s-edit
     font-size: 14px
     font-family: "Nunito", sans-serif
     
@@ -259,7 +259,7 @@
     margin-bottom: 2.5px
 
 
-.chkex
+.chkex, .chkex-edit
     accent-color: $kumera-600
     margin-right: 2.5px
 
@@ -279,6 +279,13 @@
     font-size: 14px
     font-weight: bold
     padding: 5px
+
+
+.cont-btns
+    display: flex
+
+.btn-del
+    margin-left: 10px
 
 //Media Querys
 //Dispositivos moviles

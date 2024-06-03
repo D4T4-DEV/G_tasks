@@ -2,18 +2,31 @@
 .cont-pagina
     .cont-task
         h1.tl-task-ad Administration
-        - const userTasks = Task.filter(task => task.taskOwnerUserID === userID);
-        - if (userTasks.length === 0)
+        - const userTasksOwner = Task.filter(task => task.taskOwnerUserID === userID);
+        - if (userTasksOwner.length === 0)
             .card
                 h1.title-task YEAY
-                p.fech-ent No responsibilities!
-        - else
-            each dtTask in userTasks
-                .card
-                    h1.title-task= dtTask.titleTask
-                    - const date = new Date(dtTask.deadLineTask);
-                    p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+                p.fech-ent No tasks created!
+        - else 
+                each dtTask in userTasksOwner
+                    .card
+                        h1.title-task= dtTask.titleTask
+                        - const date = new Date(dtTask.deadLineTask);
+                        p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                        a.btn-tasks(value=`${dtTask.taskID}, 1` class='admin') Show more
+
+                        - var stateTaskTEX = '';
+                        if dtTask.stateOfTask === 1
+                            - stateTaskTEX = 'To do';
+                        else if dtTask.stateOfTask === 2
+                            - stateTaskTEX = 'Doing';
+                        else if dtTask.stateOfTask === 3
+                            - stateTaskTEX = 'Done';
+                        else if dtTask.stateOfTask === 6
+                            - stateTaskTEX = 'Cancelled';
+
+                        p.fech-ent(class=taskStateClass)= "Status: " + stateTaskTEX
+
 
     .cont-task
         h1.tl-task To do
@@ -27,7 +40,7 @@
                     h1.title-task= dtTask.titleTask
                     - const date = new Date(dtTask.deadLineTask);
                     p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+                    a.btn-tasks(value=`${dtTask.taskID}, 2`) Show more
 
     .cont-task
         h1.tl-task Doing 
@@ -41,7 +54,7 @@
                     h1.title-task= dtTask.titleTask
                     - const date = new Date(dtTask.deadLineTask);
                     p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-                    a.btn-tasks(value=`${dtTask.taskID}`) Show more
+                    a.btn-tasks(value=`${dtTask.taskID}, 3`) Show more
 
     .cont-task
         h1.tl-task Done 
@@ -55,7 +68,7 @@
                     h1.title-task= dtTask.titleTask
                     - const date = new Date(dtTask.deadLineTask);
                     p.fech-ent= date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-                    a.btn-tasks(value=`${dtTask.taskID}`) Show more 
+                    a.btn-tasks(value=`${dtTask.taskID}, 4`) Show more 
 
 script.
     // cuando se esta cargando el contenido se ejecutará este
@@ -68,15 +81,43 @@ script.
         document.querySelectorAll('.btn-tasks').forEach(button => {
             button.addEventListener('click', async () => {
                 var id = button.getAttribute('value');// Obtenemos el valor del value
-                try {
-                    const response = await fetch(`/g-d-model/${id}`);
-                    const data = await response.json();
-                    setDataForModal(data);
-                } catch (error) {
-                    console.error('Error al obtener los datos: ', error);
+
+
+                const valuesID = id.split(', ');
+
+                // Para cuando esta en to do
+                if(parseInt(valuesID[1])=== 2){
+                    try {
+                        const response = await fetch(`/g-d-model/${valuesID[0]}`);
+                        const data = await response.json();
+                        setDataForModalForUserAsigment(data);
+                    } catch (error) {
+                        console.error('Error al obtener los datos: ', error);
+                    }
                 }
+
+                // Para cuando esta en to done
+                if(parseInt(valuesID[1]) === 4){
+                    try {
+                        const response = await fetch(`/g-d-model/${valuesID[0]}`);
+                        const data = await response.json();
+                        setDataForModalDone(data);
+                    } catch (error) {
+                        console.error('Error al obtener los datos: ', error);
+                    }
+                }
+
+                //- try {
+                //-     const response = await fetch(`/g-d-model/${id}`);
+                //-     const data = await response.json();
+                //-     setDataForModal(data);
+                //- } catch (error) {
+                //-     console.error('Error al obtener los datos: ', error);
+                //- }
             });
         });
+
+
     });
 
     // Funcion que agrega puntos si el texto es muy grande 
@@ -92,82 +133,146 @@ script.
 
     // Obtenemos los elementos que coincidan con este medio, devuelve un arreglo con los elementos con un index
     // Iteramos en cada uno y le asignamos el evento del click
-        function setDataForModal(data){
-            const modal = document.getElementById("Modal-res");
-            modal.classList.add('show');
-            modal.classList.remove('hide');
-            modal.style.display = 'block';
 
-
-            const dataForModal = data.dataForModal;
-            const dataUsers = data.dataUsers;
-            const dataOr = data.usersOrden; // Este puede ser nulo
-
-            // Valor del propietario
-            const own = document.getElementById('ownerR').textContent = "Owner: " + dataForModal.owner;
-            // Valor del titulo
-            const title = document.getElementById('tlR').value = dataForModal.titleTask;
-            // Opciones
-            const optionRes = document.getElementById('v-resp').textContent  = dataForModal.respUs;
-            // descripcion
-            const descripTask = document.getElementById('desR').textContent = dataForModal.instructionsTask;
-            // fecha de entrega
-            const date = document.getElementById('datR').value = new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
-            // Los usuarios responsables
-
-            const container = document.querySelector('.contR');         
-
-            // Verificamos que el objeto que queremos iterar tenga algo
-            if(dataOr && Object.keys(dataOr).length > 0){
-                // Recorremos el arreglo que viene ordenado por el server, y creamos los elementos
-                Object.entries(dataOr).forEach(([key, usersArray]) => {
-                    // Creamos el subtitulo de cada letra del alfabeto
-                    const h2 = document.createElement('h2');
-                    h2.textContent = key;
-                    h2.className = 'subt-title';
-                    container.appendChild(h2);
-
-                    // Creamos la lista
-                    const ul = document.createElement('ul');
-                    ul.className = 'list';
-                    container.appendChild(ul);
-
-                    usersArray.forEach(user => {
-                        // Creamos el elemento de la lista
-                        const li = document.createElement('li');
-                        li.className = 'element';
-
-                        // Creamos la etiqueta
-                        const label = document.createElement('label');
-                        label.className = 'txt-label';
-
-                        // Creamos el checkbox
-                        const input = document.createElement('input');
-                        input.type = 'checkbox';
-                        input.name = 'user_respon';
-                        input.className = 'chkex';
-                        input.checked = true;
-                        input.disabled = true;
-
-                        // Añadimos el checkbox a la etiqueta
-                        label.appendChild(input);
-
-                        // Añadimos el nombre del usuario a la etiqueta
-                        label.appendChild(document.createTextNode(user));
-
-                        // Añadir la etiqueta al elemento de la lista
-                        li.appendChild(label);
-
-                        // Añadir el elemento de la lista a la lista
-                        ul.appendChild(li);
-                    });
+    function setDataForModalForUserAsigment(data){
+        const modal = document.getElementById("Modal-res");
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+        const dataForModal = data.dataForModal;
+        const dataUsers = data.dataUsers;
+        const dataOr = data.usersOrden; // Este puede ser nulo
+        // Valor del propietario
+        const own = document.getElementById('ownerR').textContent = "Owner: " + dataForModal.owner;
+        // Valor del titulo
+        const title = document.getElementById('tlR').value = dataForModal.titleTask;
+        // Opciones
+        const optionRes = document.getElementById('v-resp').textContent  = dataForModal.respUs;
+        // descripcion
+        const descripTask = document.getElementById('desR').textContent = dataForModal.instructionsTask;
+        // fecha de entrega
+        const date = document.getElementById('datR').value = new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
+        // Los usuarios responsables
+        const container = document.querySelector('.contR');         
+        // Verificamos que el objeto que queremos iterar tenga algo
+        if(dataOr && Object.keys(dataOr).length > 0){
+            // Recorremos el arreglo que viene ordenado por el server, y creamos los elementos
+            Object.entries(dataOr).forEach(([key, usersArray]) => {
+                // Creamos el subtitulo de cada letra del alfabeto
+                const h2 = document.createElement('h2');
+                h2.textContent = key;
+                h2.className = 'subt-title';
+                container.appendChild(h2);
+                // Creamos la lista
+                const ul = document.createElement('ul');
+                ul.className = 'list';
+                container.appendChild(ul);
+                usersArray.forEach(user => {
+                    // Creamos el elemento de la lista
+                    const li = document.createElement('li');
+                    li.className = 'element';
+                    // Creamos la etiqueta
+                    const label = document.createElement('label');
+                    label.className = 'txt-label';
+                    // Creamos el checkbox
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.name = 'user_respon';
+                    input.className = 'chkex';
+                    input.checked = true;
+                    input.disabled = true;
+                    // Añadimos el checkbox a la etiqueta
+                    label.appendChild(input);
+                    // Añadimos el nombre del usuario a la etiqueta
+                    label.appendChild(document.createTextNode(user));
+                    // Añadir la etiqueta al elemento de la lista
+                    li.appendChild(label);
+                    // Añadir el elemento de la lista a la lista
+                    ul.appendChild(li);
                 });
+            });
+        }else{
+                const h3 = document.createElement('h3');
+                h3.textContent = "No user has been assigned for this task, only the responsible one.";
+                h3.className = 'subt-title-nop';
+                container.appendChild(h3);
+        }
+    } 
 
-            }else{
-                    const h3 = document.createElement('h3');
-                    h3.textContent = "No user has been assigned for this task, only the responsible one.";
-                    h3.className = 'subt-title-nop';
-                    container.appendChild(h3);
-            }
+    function setDataForModalDone(data){
+        const modal = document.getElementById("Modal-done");
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+        const dataForModal = data.dataForModal;
+        const dataUsers = data.dataUsers;
+        const dataOr = data.usersOrden; // Este puede ser nulo
+        // Valor del propietario
+        const own = document.getElementById('ownerD').textContent = "Owner: " + dataForModal.owner;
+        // Valor del titulo
+        const title = document.getElementById('tlD').value = dataForModal.titleTask;
+        // Opciones
+        const optionRes = document.getElementById('v-respD').textContent  = dataForModal.respUs;
+        // descripcion
+        const descripTask = document.getElementById('desD').textContent = dataForModal.instructionsTask;
+        // fecha de entrega
+        const date = document.getElementById('datD').value = new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
 
-        } 
+        const desDStatus = document.getElementById('desDStatus').textContent = dataForModal.commentsTaskFinishOrCancell + " \nWho wrote it? " + dataForModal.userComnFinCan;
+
+        if(dataForModal.stateOfTask === 6){
+            const statu = document.getElementById('statu').textContent = "Status: Canceled task";
+        }else{
+            const statu = document.getElementById('statu').textContent = "Status: Finished work";
+        }
+
+        const f_ini = document.getElementById('I-in-D').textContent = 'Creation date: ' + new Date(dataForModal.dateCreation).toISOString().split('T')[0];
+        const f_dtlin = document.getElementById('F-in-D').textContent = 'Deadline: ' + new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
+
+        // Los usuarios responsables
+        const container = document.querySelector('.contD');        
+
+        // Verificamos que el objeto que queremos iterar tenga algo
+        if(dataOr && Object.keys(dataOr).length > 0){
+            // Recorremos el arreglo que viene ordenado por el server, y creamos los elementos
+            Object.entries(dataOr).forEach(([key, usersArray]) => {
+                // Creamos el subtitulo de cada letra del alfabeto
+                const h2 = document.createElement('h2');
+                h2.textContent = key;
+                h2.className = 'subt-title';
+                container.appendChild(h2);
+                // Creamos la lista
+                const ul = document.createElement('ul');
+                ul.className = 'list';
+                container.appendChild(ul);
+                usersArray.forEach(user => {
+                    // Creamos el elemento de la lista
+                    const li = document.createElement('li');
+                    li.className = 'element';
+                    // Creamos la etiqueta
+                    const label = document.createElement('label');
+                    label.className = 'txt-label';
+                    // Creamos el checkbox
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.name = 'user_respon';
+                    input.className = 'chkex';
+                    input.checked = true;
+                    input.disabled = true;
+                    // Añadimos el checkbox a la etiqueta
+                    label.appendChild(input);
+                    // Añadimos el nombre del usuario a la etiqueta
+                    label.appendChild(document.createTextNode(user));
+                    // Añadir la etiqueta al elemento de la lista
+                    li.appendChild(label);
+                    // Añadir el elemento de la lista a la lista
+                    ul.appendChild(li);
+                });
+            }); 
+        }else{
+                const h3 = document.createElement('h3');
+                h3.textContent = "No user has been assigned for this task, only the responsible one.";
+                h3.className = 'subt-title-nop';
+                container.appendChild(h3);
+        }
+    } 

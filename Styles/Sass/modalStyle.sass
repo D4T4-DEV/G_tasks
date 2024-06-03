@@ -68,15 +68,7 @@
     display: flex
     justify-content: flex-end
 
-#btn-cls 
-    display: block
-    cursor: pointer
-    font-size: 23px
-    color: $kumera-950
-    font-weight: bolder
-    text-align: right
-
-#btn-clsR
+#btn-cls, #btn-clsR, #btn-clsD
     display: block
     cursor: pointer
     font-size: 23px
@@ -92,7 +84,7 @@
     display: flex
     justify-content: flex-end
 
-#btn-bck
+#btn-bck, #btn-bckR, #btn-bckD
     display: block
     cursor: pointer
     font-size: 23px
@@ -101,26 +93,7 @@
     margin-bottom: 12px
     font-weight: bolder
 
-#btn-bckR
-    display: block
-    cursor: pointer
-    font-size: 23px
-    color: $kumera-700
-    text-align: left
-    margin-bottom: 12px
-    font-weight: bolder
-
-#btn-next
-    display: inline-block
-    transform: rotate(180deg)
-    cursor: pointer
-    font-size: 23px
-    color: $kumera-700
-    text-align: left
-    margin-bottom: 12px
-    font-weight: bolder
-
-#btn-nextR
+#btn-next, #btn-nextR, #btn-nextD
     display: inline-block
     transform: rotate(180deg)
     cursor: pointer
@@ -168,22 +141,12 @@
     flex-direction: column
     width: 70%
 
-.cont-firs
+.cont-firs, .cont-firsR, .cont-firsD
     display: flex
     flex-direction: column
     width: 100%
 
-.cont-firsR
-    display: flex
-    flex-direction: column
-    width: 100%
-
-.cont-second 
-    display: none
-    flex-direction: column
-    width: 100%
-
-.cont-secondR
+.cont-second, .cont-secondR, .cont-secondD
     display: none
     flex-direction: column
     width: 100%
@@ -306,6 +269,17 @@
     font-size: 18px
     font-family: "Nunito", sans-serif
 
+.dates-don
+    display: flex
+    justify-content: space-around
+
+
+#I-in-D, #F-in-D, #statu
+    font-family: "Nunito", sans-serif
+    font-size: 14px
+    font-weight: bold
+    padding: 5px
+
 //Media Querys
 //Dispositivos moviles
 @media only screen and (max-width: 600px)
@@ -318,11 +292,20 @@
     .formulario
         width: 100%
 
+    #I-in-D, #F-in-D, #statu
+        font-size: 12px
+
+    .cont-users-chk
+        height: 155px
+
 // Tabletas 
 @media only screen and (min-width: 601px) and (max-width: 1024px)
 
     .cont-modal
         width: 50%
+
+    .cont-users-chk
+        height: 170px
 
 // Desktops
 @media only screen and (min-width: 1025px)

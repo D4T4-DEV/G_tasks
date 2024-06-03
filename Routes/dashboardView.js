@@ -13,21 +13,17 @@ const { extractDataNotification, createNotification } = require('../Models/notif
 // Ruta de renderizado de la vista 
 router.get('/', async (req, res) => {
 
-    var username = undefined;
     var dataAllUsers = undefined;
     var alert = req.session.alert;
     const token = req.cookies.token;
     delete req.session.alert;
 
     try {
-        username = req.user.username;
-
         // Obtenemos todos los datos de los usuarios
         dataAllUsers = await userController.getAllDataUsers(token);
 
         // Devolucion de las tareas por usuario y o por ser el creador 
         const Task = await taskController.getMyTaskAssigned(req.user.id, token);
-
         const tasksToDo = Task.filter(task => task.stateOfTask === 1 && isUserAssigned(task, req.user.id));
         const tasksDoing = Task.filter(task => task.stateOfTask === 2 && isUserAssigned(task, req.user.id));
         const tasksDone = Task.filter(task => task.stateOfTask === 3 && isUserAssigned(task, req.user.id));
@@ -35,13 +31,14 @@ router.get('/', async (req, res) => {
         res.render('dashboard', {
             alerta: alert,
             userID: req.user.id,
-            user: username,
+            user: req.user.username,
             userData: organizeByAlphabet(dataAllUsers),
             Task: Task,
             tasksToDo: tasksToDo,
             tasksDoing: tasksDoing,
             tasksDone: tasksDone
         });
+
     } catch (err) {
         if (err.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos

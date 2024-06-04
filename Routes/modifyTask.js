@@ -1,16 +1,10 @@
-/*
-    Este archivo describe las acciones que se daran durante la pantalla crear tarea 
-    y como se mostrará en cuestión.
-*/
-
 const express = require('express');
 const router = express.Router();
-
 const taskController = require('../Controllers/tasksController');
-const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
+const { extractDataNotification, createNotification } = require('../Models/notificacionesModel'); // Aspecto que viene del modelo notificaciones
 
-// Ruta de renderizado de la vista 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
+    const idTask = req.params.id; // aspecto que viene del server
     const { title, userRespons, descrip, date_finish, user_respon } = req.body;
     var users = '';
 
@@ -25,22 +19,21 @@ router.post('/', async (req, res) => {
             users = user_respon;
         }
     }
-
+    
     try {
-        const respon = await taskController.createNewTask(req.user.id, title, userRespons, descrip, date_finish, users, req.cookies.token);
-        req.session.alert = extractDataNotification(respon);
-        return res.redirect('/dashboard');
+        const result = await taskController.modifyTask(idTask, title, userRespons, descrip, date_finish, users, req.cookies.token);
+        req.session.alert = extractDataNotification(result.data);
+        res.redirect('/dashboard');
     } catch (err) {
-        console.log('Se registro en la creacion de la tarea');
         if (err.response) {
             // Analisis de la respuesta que nos dio la API, aunque no sea algo estable, mantiene los datos
             req.session.alert = extractDataNotification(err.response.data);
         }
+        // Aviso generico cuando la API no esta encendida
         req.session.alert = createNotification('sick', 'Oh no...', `We're having troubles, please try again later.`);
         res.redirect('/');
     }
+
 });
 
-
 module.exports = router;
-// Esta es una sección importante que necesita ser completada.

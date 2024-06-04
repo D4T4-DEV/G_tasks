@@ -3,7 +3,7 @@ const router = express.Router();
 
 const taskController = require('../Controllers/tasksController');
 const userController = require('../Controllers/userController');
-const {organizeByAlphabetUsersSe} = require('../Models/OrganizadorInfo/organiceDataUser');
+const { organizeByAlphabetUsersSe } = require('../Models/OrganizadorInfo/organiceDataUser');
 
 router.get('/:id', async (req, res) => {
     const idTask = req.params.id; // aspecto que viene del server
@@ -13,17 +13,17 @@ router.get('/:id', async (req, res) => {
 
         const dataSoloForModalRes = dataForModalRes.data;
 
-        if(dataSoloForModalRes.asigUs === null){
+        if (dataSoloForModalRes.asigUs === null) {
             return res.json({
                 dataForModal: dataSoloForModalRes,
                 usersOrden: null
-            }); 
-        }else{
+            });
+        } else {
             const dataOrgAssignedUsers = await organizeByAlphabetUsersSe(dataSoloForModalRes.asigUs.split(',').map(dt => dt.trim()));
             return res.json({
                 dataForModal: dataSoloForModalRes,
                 usersOrden: dataOrgAssignedUsers
-            }); 
+            });
         }
 
     } catch (err) {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
         return res.json({
             dataForModal: null,
             usersOrden: null
-        }); 
+        });
     }
 
 });

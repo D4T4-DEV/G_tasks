@@ -22,6 +22,10 @@ const pPrincipalView = require('./dashboardView');
 
 // Ruta del proceso para crear una nueva tarea
 const createdTask = require('./createTask');
+// Ruta del proceso para modificar una tarea
+const modifiTask = require('./modifyTask');
+// Ruta del proceso para eliminar una tarea
+const deleteTask = require('./deleteTask');
 
 // RUTAS para usar en AJAX
 const getDataForModal = require('./getDataForModal');
@@ -46,6 +50,10 @@ router.use('/dashboard', pPrincipalView);
 
 // Crear una tarea
 router.use('/create-new-task', createdTask);
+// Borrar una tarea
+router.use('/delete', deleteTask);
+// Modificar una tarea
+router.use('/edit-task', modifiTask);
 
 
 // // Configuracion de la pantalla de myCreatedTask

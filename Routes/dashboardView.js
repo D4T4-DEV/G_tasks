@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 
     var dataAllUsers = undefined;
     var alert = req.session.alert;
-    const token = req.cookies.token;
     delete req.session.alert;
+    const token = req.cookies.token;
 
     try {
         // Obtenemos todos los datos de los usuarios

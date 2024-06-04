@@ -4,7 +4,7 @@ div(class='modal' id='Modal-bkg-edit')
             span(id='btn-cls-edit') &times
         h1.title Administration
         .cont-form
-            form(action="/edit-task" class="formulario" method='POST' autocomplete="off")
+            form(action=`/edit-task/` class="formulario" method='POST' autocomplete="off", id='fom-modif')
                 .cont-firs-edit
                     h2.subt-title Data general task
 
@@ -63,7 +63,7 @@ div(class='modal' id='Modal-bkg-edit')
 
 
                         label(class="etiqueta-form" for ='desDStatusE') Why Status
-                        textarea(name="descrip", class="entrada text-area", id='desDStatusE', required, readonly)
+                        textarea(class="entrada text-area", id='desDStatusE', required, readonly)
                         .dates-don
                             p.subt-title-nop(id='I-in-D-E') Creation date:
                             p.subt-title-nop(id='F-in-D-E') Deadline:
@@ -71,14 +71,7 @@ div(class='modal' id='Modal-bkg-edit')
                         .cont-btns
                             button(type="button" class="btn-del") Delete task
 
-script. 
-        // Animacion del modal para abrirlo
-        //- document.getElementById('n-task').addEventListener('click', () => {
-        //-     const modal = document.getElementById("Modal-bkg-edit");
-        //-     modal.classList.add('show');
-        //-     modal.classList.remove('hide');
-        //-     modal.style.display = 'block';
-        //- });
+script.
 
         // Evento para cerrar el modal
         document.getElementById('btn-cls-edit').addEventListener('click', () => {
@@ -164,6 +157,17 @@ script.
 
             const primeraTerceroForm = document.querySelector('.cont-terc-edit');
             primeraTerceroForm.style.display = "none";
+        });
+
+        // Selecciona todos los botones con la clase 'btn-clsDELT'
+        // Itera sobre cada botón y agrega el event listener
+        document.querySelectorAll('.btn-del').forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById("Modal-resDEL");
+                modal.classList.add('show');
+                modal.classList.remove('hide');
+                modal.style.display = 'block';
+            });
         });
 
         // Establecer la fecha máxima del input a la fecha actual

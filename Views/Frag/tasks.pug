@@ -152,8 +152,8 @@ script.
                     const dataForModal = data.dataForModal;
                     const dataUsers = data.dataUsers;
                     const dataOr = data.usersOrden; // Este puede ser nulo
-                            console.log(dataForModal)
 
+                    console.log(dataForModal)
                     // Aspectos para rellenar los datos
                     // Para el titulo
                     const tl_edit = document.getElementById('tl-edit').value = dataForModal.titleTask;
@@ -212,14 +212,15 @@ script.
                         StatusDesc.textContent = dataForModal.commentsTaskFinishOrCancell + " \nWho wrote it? " + dataForModal.userComnFinCan;
                     }
 
+                    const btn_del = document.getElementById('b-del').href = '/delete/' + dataForModal.taskID;
+
                     //- if(dataForModal.stateOfTask === 6){
                     //-     const statu = document.getElementById('statu-E').textContent = "Status: Canceled task";
                     //- }else{
                     //-     if()
                     //-     const statu = document.getElementById('statu-E').textContent = "Status: Finished work";
                     //- }
-
-
+                    const fomr = document.getElementById('fom-modif').action = '/edit-task/' + dataForModal.taskID;
         }
     }
 

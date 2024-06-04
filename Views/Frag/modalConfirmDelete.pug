@@ -1,0 +1,46 @@
+div(class='modal' id='Modal-resDEL')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-clsDELT') &times;
+        h1.title You really want to delete this task?
+        .cont-form
+                .cont-firsRD
+                    .cont-btns
+                        button(type="button", class="btn" id='b-n') NO
+                        a(class="btn-del" id='b-del') YES
+script.
+    
+    // Evento para cerrar el modal
+    document.getElementById('btn-clsDELT').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-resDEL");
+        // Primer contenedor
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+        }, 200);
+    });
+
+    document.getElementById('b-n').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-resDEL");
+        // Primer contenedor
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+        }, 200);
+    });
+
+    // Itera sobre cada botón y agrega el event listener
+    document.querySelectorAll('.btn-del').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = document.getElementById("Modal-resDEL");
+            // Primer contenedor
+            modal.classList.add('show');
+            modal.classList.remove('hide');
+        });
+    });

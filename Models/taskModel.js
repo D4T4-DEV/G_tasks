@@ -117,7 +117,7 @@ async function acTask(idTask, token) {
     }
 }
 
-async function termiTask(idTask,userID, reason, token){
+async function termiTask(idTask, userID, reason, token){
     const axiosConfig = {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -133,6 +133,22 @@ async function termiTask(idTask,userID, reason, token){
     }
 }
 
+async function cancellTask(idTask, userID, reason, token){
+    const axiosConfig = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    };
+
+    try {
+        const response = await axios.put(`${process.env.BASE_URL}/task/cancell-task/`, {idTask, userID, reason}, axiosConfig);
+        return response;
+    } catch (err) {
+        console.error('Error al cancelar una tarea por ID una tarea (MODEL): posiblemente la api tenga un fallo o este caida');
+        throw err;
+    }
+}
+
 module.exports = {
     createNewTask,
     getMyTaskAssigned,
@@ -140,5 +156,6 @@ module.exports = {
     modifyTask,
     deleteTask,
     acTask,
-    termiTask
+    termiTask,
+    cancellTask
 };

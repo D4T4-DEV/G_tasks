@@ -1,38 +1,38 @@
-div(class='modal' id='Modal-resFin-fin')
+div(class='modal' id='Modal-res-can')
     .cont-modal 
         .cont-close-btn
-            span(id='btn-clsFini') &times;
-        h1.title You really want to complete this task?
+            span(id='btn-cls-can-task') &times;
+        h1.title You really want to cancell this task?
         .cont-form
-            form(action=`/` class="formulario" method='POST' autocomplete="off", id='fom-finshi')
+            form(action=`/` class="formulario" method='POST' autocomplete="off", id='fom-can-task')
                 .cont-firsRD
-                    label(class="etiqueta-form" for ='rs-fin') Reason:
-                    textarea(name="reason", class="entrada text-area", id='rs-fin', required)
+                    label(class="etiqueta-form" for ='rs-fin-can') Reason:
+                    textarea(name="reason_cancell", class="entrada text-area", id='rs-fin-can', required)
                     .cont-btns
-                        button(type="button", class="btn" id='b-n-fin') NO
+                        button(type="button", class="btn" id='b-n-fin-can') NO
                         //- a(class="btn-del" id='b-del') YES
                         button(type="submit" class="btn-del") YES
 script.
     
     // Evento para cerrar el modal
-    document.getElementById('btn-clsFini').addEventListener('click', () => {
-        const modal = document.getElementById("Modal-resFin-fin");
+    document.getElementById('btn-cls-can-task').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-res-can");
         // Primer contenedor
         modal.classList.add('hide');
         modal.classList.remove('show');
-        const labelRason = document.getElementById('rs-fin'); // Este elemento esta en modalFinish
+        const labelRason = document.getElementById('rs-fin-can'); // Este elemento esta en modalFinish
         setTimeout(() => {
             modal.style.display = 'none';
             labelRason.value = '';
         }, 200);
     });
 
-    document.getElementById('b-n-fin').addEventListener('click', () => {
-        const modal = document.getElementById("Modal-resFin-fin");
+    document.getElementById('b-n-fin-can').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-res-can");
         // Primer contenedor
         modal.classList.add('hide');
         modal.classList.remove('show');
-        const labelRason = document.getElementById('rs-fin'); // Este elemento esta en modalFinish
+        const labelRason = document.getElementById('rs-fin-can'); // Este elemento esta en modalFinish
 
         setTimeout(() => {
             modal.style.display = 'none';

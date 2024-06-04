@@ -31,7 +31,7 @@ div(class='modal' id='Modal-doing')
                     h2.subt-title Users in this task
                     .cont-users-chk
                             .cont-doing
-
+                            
                     button(type="button" class="btn", id='btn-cambio-fin-task') Finished
 
 script.
@@ -54,6 +54,9 @@ script.
         //- segundaPartForm.style.display = "none";
         // Contenedor de los elementos checkBox
         const contABorrarSP = document.querySelector('.cont-doing');
+
+        const descripTask = document.getElementById('des');
+        
         modal.classList.add('hide');
         modal.classList.remove('show');
         setTimeout(() => {
@@ -83,9 +86,7 @@ script.
     });
 
     document.getElementById('btn-cambio-fin-task').addEventListener('click', () => {
-        console.log('click')
         const modal = document.getElementById('Modal-resFin-fin');
-        console.log(modal)
         modal.classList.add('show');
         modal.classList.remove('hide');
         modal.style.display = 'block';

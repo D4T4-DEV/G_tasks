@@ -31,8 +31,9 @@ div(class='modal' id='Modal-res')
                     h2.subt-title Users in this task
                     .cont-users-chk
                             .contR
-
-                    a(class="btn", id='btn-cambio-acp') I got it
+                    .cont-btns
+                        button(type="submit", class="btn" id='btn-cnc-to-do') Cancell
+                        a(class="btn", id='btn-cambio-acp') I got it
 
 script.
     // Animacion del modal para abrirlo
@@ -80,3 +81,12 @@ script.
         primeraSegundoForm.style.display = "none";
     });
 
+    document.getElementById('btn-cnc-to-do').addEventListener('click', ()=>{
+    });
+
+    document.getElementById('btn-cnc-to-do').addEventListener('click', () => {
+        const modal = document.getElementById('Modal-res-can');
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+    });

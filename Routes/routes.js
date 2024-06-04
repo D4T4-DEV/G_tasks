@@ -30,6 +30,8 @@ const deleteTask = require('./deleteTask');
 const changeStatus = require('./changeStatus');
 // Ruta del proceso para finalizar la tarea
 const finTask = require('./finishTask');
+// Ruta del proceso para cancelar la tarea
+const canTask = require('./cancellTask');
 
 // RUTAS para usar en AJAX
 const getDataForModal = require('./getDataForModal');
@@ -62,6 +64,8 @@ router.use('/edit-task', modifiTask);
 router.use('/accep-task', changeStatus);
 // Finalizar la tarea
 router.use('/fin-task/', finTask);
+// Cancelar la tarea
+router.use('/can-task', canTask);
 
 // // Configuracion de la pantalla de myCreatedTask
 // router.use('/created-tasks', pMyCreatedTask);

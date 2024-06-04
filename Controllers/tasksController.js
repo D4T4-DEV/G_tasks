@@ -31,6 +31,10 @@ async function termiTask(idTask, userID, reason, token){
     return await taskModel.termiTask(idTask, userID, reason, token);
 }
 
+async function cancellTask(idTask, userID, reason, token){
+    return await taskModel.cancellTask(idTask, userID, reason, token);
+}
+
 module.exports = {
     createNewTask,
     getMyTaskAssigned,
@@ -38,5 +42,6 @@ module.exports = {
     modifyTask,
     deleteTask,
     acTask,
-    termiTask
+    termiTask,
+    cancellTask
 };

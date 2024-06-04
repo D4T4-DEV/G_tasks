@@ -39,6 +39,9 @@ Tendrás que cumplir con los siguientes medios:
     - `npm start` y esta empezará a correr en el puerto `3000`.
 
 
+#### Tipo de "proyecto": 
+- Lista de Tareas colaborativas.
+
 #### Nota: 
 Si no quieres instalar una a una las dependencias puedes correr el siguiente comando estando dentro del directorio del proyecto (usando la terminal):
 

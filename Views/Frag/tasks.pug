@@ -139,15 +139,89 @@ script.
         return title;
     }
 
-
     function setDataForModalForEdit(data){
-        const modal = document.getElementById("Modal-bkg-edit");
-        modal.classList.add('show');
-        modal.classList.remove('hide');
-        modal.style.display = 'block';
+        // Comprobamos que podamos editarlo, para ello, comparamos
+        if(data.dataForModal.stateOfTask === 3 || data.dataForModal.stateOfTask === 6){
+            setDataForModalDone(data);
+        }else{
+            const modal = document.getElementById("Modal-bkg-edit");
+                    modal.classList.add('show');
+                    modal.classList.remove('hide');
+                    modal.style.display = 'block';
+
+                    const dataForModal = data.dataForModal;
+                    const dataUsers = data.dataUsers;
+                    const dataOr = data.usersOrden; // Este puede ser nulo
+                            console.log(dataForModal)
+
+                    // Aspectos para rellenar los datos
+                    // Para el titulo
+                    const tl_edit = document.getElementById('tl-edit').value = dataForModal.titleTask;
+
+                    // Para las opciones
+                    document.querySelectorAll('.option-s-edit').forEach(option => {
+                        //Filtramos el valor, que puede contener " (YOU)"
+                        if(option.textContent.split(" (You)")[0] === dataForModal.respUs){
+                            option.selected = true;
+                        }
+                    });
+                    // Para las instrucciones
+                    const descripTask = document.getElementById('des-edit').textContent = dataForModal.instructionsTask;
+                    // Para la fecha 
+                    const date = document.getElementById('dat-edit').value = new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
+
+                    const F_cre = document.getElementById('I-in-D-E').textContent = 'Creation date: ' + new Date(dataForModal.dateCreation).toISOString().split('T')[0];
+                    const F_fin = document.getElementById('F-in-D-E').textContent = 'Deadline: ' + new Date(dataForModal.dateCreation).toISOString().split('T')[0];
+
+                    const checkboxes = document.querySelectorAll('.chkex-edit');
+                    checkboxes.forEach(checkbox => {
+                        // Obtenemos el valor de su elemento padre del chckbox -> (LABEL)
+                        const usernameText = checkbox.parentElement.textContent.trim();
+
+                        if(dataForModal.asigUs != null){
+                            if(dataForModal.asigUs.split(',').filter(elemento => elemento.includes(usernameText))){
+                                checkbox.checked = true;
+                            }
+                        }
+                    });
+
+                    const statu = document.getElementById('statu-E');
+                    switch(dataForModal.stateOfTask){
+                        case 1: 
+                                statu.textContent = "Status: To do";
+                                break;
+
+                        case 2: 
+                                statu.textContent = "Status: Doing";
+                                break;
+
+                        case 3:
+                                statu.textContent = "Status: Done";
+                                break;
+
+                        case 6:
+                                statu.textContent = "Status: Cancelled";
+                                break;
+                    }
+
+                    const StatusDesc = document.getElementById('desDStatusE');
+
+                    if(dataForModal.commentsTaskFinishOrCancell == null && dataForModal.userComnFinCan == null){
+                        StatusDesc.textContent = "No comments, the task is going well.";
+                    }else{
+                        StatusDesc.textContent = dataForModal.commentsTaskFinishOrCancell + " \nWho wrote it? " + dataForModal.userComnFinCan;
+                    }
+
+                    //- if(dataForModal.stateOfTask === 6){
+                    //-     const statu = document.getElementById('statu-E').textContent = "Status: Canceled task";
+                    //- }else{
+                    //-     if()
+                    //-     const statu = document.getElementById('statu-E').textContent = "Status: Finished work";
+                    //- }
+
+
+        }
     }
-
-
 
     function setDataForModalForUserAsigment(data){
         const modal = document.getElementById("Modal-res");
@@ -220,6 +294,7 @@ script.
         modal.classList.remove('hide');
         modal.style.display = 'block';
         const dataForModal = data.dataForModal;
+
         const dataUsers = data.dataUsers;
         const dataOr = data.usersOrden; // Este puede ser nulo
         // Valor del propietario

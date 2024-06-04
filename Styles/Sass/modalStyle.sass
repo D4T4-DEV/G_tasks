@@ -78,13 +78,16 @@
 
 .cont-back
     display: flex
-    justify-content: flex-start
+    justify-content: space-between
+    margin-bottom: 12px
+
+
 
 .cont-next 
     display: flex
     justify-content: flex-end
 
-#btn-bck, #btn-bckR, #btn-bckD, #btn-bck-edit
+#btn-bck, #btn-bckR, #btn-bckD, #btn-bck-edit, #btn-bck-edit-2
     display: block
     cursor: pointer
     font-size: 23px
@@ -102,6 +105,19 @@
     text-align: left
     margin-bottom: 12px
     font-weight: bolder
+
+#btn-next-edit-2
+    display: inline-block
+    transform: rotate(180deg)
+    cursor: pointer
+    font-size: 23px
+    color: $kumera-700
+    text-align: left
+    font-weight: bolder
+    margin-bottom: 12px
+
+#btn-bck-edit, #btn-next-edit-2
+    margin-bottom: 0px
 
 .title
   font-family: "Poetsen One", sans-serif
@@ -146,7 +162,7 @@
     flex-direction: column
     width: 100%
 
-.cont-second, .cont-secondR, .cont-secondD, .cont-second-edit
+.cont-second, .cont-secondR, .cont-secondD, .cont-second-edit, .cont-terc-edit
     display: none
     flex-direction: column
     width: 100%
@@ -274,9 +290,9 @@
     justify-content: space-around
 
 
-#I-in-D, #F-in-D, #statu
+#I-in-D, #F-in-D, #statu, #I-in-D-E, #F-in-D-E, #statu-E
     font-family: "Nunito", sans-serif
-    font-size: 14px
+    font-size: 12.5px
     font-weight: bold
     padding: 5px
 
@@ -309,7 +325,7 @@
 @media only screen and (min-width: 601px) and (max-width: 1024px)
 
     .cont-modal
-        width: 50%
+        width: 75%
 
     .cont-users-chk
         height: 170px

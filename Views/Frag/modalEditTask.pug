@@ -2,7 +2,7 @@ div(class='modal' id='Modal-bkg-edit')
     .cont-modal 
         .cont-close-btn
             span(id='btn-cls-edit') &times
-        h1.title New task
+        h1.title Administration
         .cont-form
             form(action="/edit-task" class="formulario" method='POST' autocomplete="off")
                 .cont-firs-edit
@@ -35,9 +35,11 @@ div(class='modal' id='Modal-bkg-edit')
                 .cont-second-edit
                     .cont-back 
                         span(class="material-symbols-outlined" id='btn-bck-edit' title="Go back") arrow_back
+                        span(class="material-symbols-outlined" id='btn-next-edit-2' title="Next fields") arrow_back
+                        
                     h2.subt-title Users in this task
 
-                    label.etiqueta-form Responsible user (If you don't want any, leave it unchecked.)
+                    label.etiqueta-form Assigned users (If you don't want any, leave it unchecked.)
                     .cont-users-chk
                             .cont
                                 each users, letter in userData
@@ -49,9 +51,26 @@ div(class='modal' id='Modal-bkg-edit')
                                                     label.txt-label
                                                         input(type="checkbox" name="user_respon" class='chkex-edit' value=data.id id=data.id)
                                                         | #{data.username}
+
+
                     .cont-btns
-                        button(type="submit", class="btn" id='btn-cambio') Modify task
-                        a(class="btn-del" href='/HOLA' ) Delete task
+                            button(type="submit", class="btn" id='btn-cambio') Modify task
+                            button(type="button" class="btn-del") Delete task
+
+                .cont-terc-edit
+                        .cont-back 
+                            span(class="material-symbols-outlined" id='btn-bck-edit-2' title="Go back") arrow_back
+
+
+                        label(class="etiqueta-form" for ='desDStatusE') Why Status
+                        textarea(name="descrip", class="entrada text-area", id='desDStatusE', required, readonly)
+                        .dates-don
+                            p.subt-title-nop(id='I-in-D-E') Creation date:
+                            p.subt-title-nop(id='F-in-D-E') Deadline:
+                            p.subt-title-nop(id='statu-E') Status: 
+                        .cont-btns
+                            button(type="button" class="btn-del") Delete task
+
 script. 
         // Animacion del modal para abrirlo
         //- document.getElementById('n-task').addEventListener('click', () => {
@@ -70,6 +89,8 @@ script.
             // Segundo contenedor
             const segundaPartForm = document.querySelector('.cont-second-edit');
             //- segundaPartForm.style.display = "none";
+            const primeraTerceroForm = document.querySelector('.cont-terc-edit');
+            
 
             // Valor del titulo
             const title = document.getElementById('tl-edit');
@@ -89,21 +110,12 @@ script.
                 // Cambios del contenedores
                 primeraPartForm.style.display = "flex";
                 segundaPartForm.style.display = "none";
+                primeraTerceroForm.style.display = "none";
 
-                // Cambios en los inputs 
-                title.value = ''; // titulo
-                optionRes.value = 0; // opciones de responsabilidad 
-                descripTask.value = ''; // descripcion de la tarea
-                date.value = ''; // fecha de entrega
-                // usuarios responsables
                 checkboxes.forEach(checkbox => {
                     checkbox.checked = false;
                 });
             }, 200);
-
-            setTimeout(()=>{
-
-            },400);
         });
 
         // Evneto para mostrar la siguiente parte del formulario
@@ -113,6 +125,22 @@ script.
 
             const primeraSegundoForm = document.querySelector('.cont-second-edit');
             primeraSegundoForm.style.display = "flex";
+
+            const primeraTerceroForm = document.querySelector('.cont-terc-edit');
+            primeraTerceroForm.style.display = "none";
+
+        });
+
+        // Evneto para mostrar la siguiente parte del formulario
+        document.getElementById('btn-next-edit-2').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs-edit'); // Aspectos del div
+            primeraParteForm.style.display = "none";
+
+            const primeraSegundoForm = document.querySelector('.cont-second-edit');
+            primeraSegundoForm.style.display = "none";
+
+            const primeraTerceroForm = document.querySelector('.cont-terc-edit');
+            primeraTerceroForm.style.display = "flex";
         });
 
         // Evento para volver al anterior parte del formulario
@@ -122,6 +150,20 @@ script.
             
             const primeraSegundoForm = document.querySelector('.cont-second-edit');
             primeraSegundoForm.style.display = "none";
+
+            const primeraTerceroForm = document.querySelector('.cont-terc-edit');
+            primeraTerceroForm.style.display = "none";
+        });
+
+        document.getElementById('btn-bck-edit-2').addEventListener('click', () => {
+            const primeraParteForm = document.querySelector('.cont-firs-edit'); // Aspectos del div
+            primeraParteForm.style.display = "none";
+            
+            const primeraSegundoForm = document.querySelector('.cont-second-edit');
+            primeraSegundoForm.style.display = "flex";
+
+            const primeraTerceroForm = document.querySelector('.cont-terc-edit');
+            primeraTerceroForm.style.display = "none";
         });
 
         // Establecer la fecha máxima del input a la fecha actual

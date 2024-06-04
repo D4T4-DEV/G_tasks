@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const taskController = require('../Controllers/tasksController');
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel'); // Aspecto que viene del modelo notificaciones
+const {authenticate} = require('../Models/autenticator/autenticator');
 
-router.post('/:id', async (req, res) => {
+router.post('/:id', authenticate, async (req, res) => {
     const idTask = req.params.id; // aspecto que viene del server
     const { title, userRespons, descrip, date_finish, user_respon } = req.body;
     var users = '';

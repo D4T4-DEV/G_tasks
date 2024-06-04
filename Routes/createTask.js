@@ -8,9 +8,10 @@ const router = express.Router();
 
 const taskController = require('../Controllers/tasksController');
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
+const {authenticate} = require('../Models/autenticator/autenticator');
 
 // Ruta de renderizado de la vista 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     const { title, userRespons, descrip, date_finish, user_respon } = req.body;
     var users = '';
 

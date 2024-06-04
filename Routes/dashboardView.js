@@ -9,9 +9,10 @@ const userController = require('../Controllers/userController');
 const taskController = require('../Controllers/tasksController');
 const { organizeByAlphabet } = require('../Models/OrganizadorInfo/organiceDataUser');
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel');
+const {authenticate} = require('../Models/autenticator/autenticator');
 
 // Ruta de renderizado de la vista 
-router.get('/', async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
 
     var dataAllUsers = undefined;
     var alert = req.session.alert;

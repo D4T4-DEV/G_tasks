@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
-
+const { extractDataNotification, createNotification } = require('../notificacionesModel'); // Aspecto que viene del modelo notificaciones
 //Configura DotEnv
 dotenv.config();
 
@@ -41,8 +41,38 @@ function generateToken(data, expirationTime) {
     return jwt.sign({ data }, process.env.RSA_PRIVATE_KEY, { algorithm: 'RS256', expiresIn: expirationTime });
 }
 
+
+async function authenticate(req, res, next) {
+    // Verifica si hay un token en las cookies de la solicitud
+    const token = req.cookies.token;
+
+    // Si no hay token, redirige al usuario al login
+    if (!token) {
+        console.log('No se dio un token!');
+        req.session.alert = createNotification('poker_chip', 'TOKEN INVALID', 'If there is no token, there is no information');
+        return res.redirect('/');
+    }
+
+    try {
+        // Verifica el token usando la clave privada RSA del entorno
+        const decoded = jwt.verify(token, process.env.RSA_PRIVATE_KEY);
+
+        // Almacena el ID del usuario en la solicitud para su posterior uso
+        req.userId = decoded.userId;
+
+        next();
+
+    } catch (err) {
+        console.log('No se pudo vericar el token!');
+        req.session.alert = createNotification('poker_chip', 'TOKEN INVALID', 'Problems verifying it');
+        // Si hay un error en la verificación del token, redirige al usuario al login
+        return res.redirect('/');
+    }
+}
+
 module.exports={
     encryptData,
     getHash,
-    generateToken
+    generateToken,
+    authenticate
 };

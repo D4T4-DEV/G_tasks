@@ -21,6 +21,7 @@ const userController = require('./Controllers/userController');
 const security = require('./Models/autenticator/autenticator');
 const {createNotification} = require('./Models/notificacionesModel'); // Aspecto para crear notificaciones
 
+const {authenticate} = require('./Models/autenticator/autenticator');
 
 // VARIABLES
 var notifyLogin = undefined;
@@ -82,7 +83,7 @@ passport.use(new LocalStrategy({
 ));
 
 // Midleware para cerrar sesion
-app.get('/logout', async (req, res) => {
+app.get('/logout', authenticate, async (req, res) => {
 
   await req.logout(async (err) => {
     if (err) {

@@ -3,8 +3,9 @@ const router = express.Router();
 const { extractDataNotification, createNotification } = require('../Models/notificacionesModel'); // Aspecto que viene del modelo notificaciones
 
 const taskController = require('../Controllers/tasksController');
+const {authenticate} = require('../Models/autenticator/autenticator');
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
     const idTask = req.params.id; // aspecto que viene del server
     const token = req.cookies.token;
 

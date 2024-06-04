@@ -1,0 +1,93 @@
+div(class='modal' id='Modal-doing')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-clsRDOin') &times;
+        h1.title Doing
+        .cont-form
+                .cont-firsRDoin
+                    h2.subt-title Data general task
+
+                    p.txt(id='ownerRDon')
+
+                    label(class="etiqueta-form" for='tlRDoing') Title task
+                    input(type="text", placeholder="Title", name="title", id='tlRDoing', class="entrada", required, readonly)
+
+                    label(class="etiqueta-form" for='op-users') Responsible user 
+                    select(name="userRespons", class="entrada user-select", id='op-users', required, readonly)
+                        option(value=respUs, class='option-s' id='v-resp-doing')
+
+                    label(class="etiqueta-form" for ='des-doing') Task description
+                    textarea(name="descrip", class="entrada text-area", id='des-doing', required, readonly)= instructionsTask
+
+                    label(class="etiqueta-form" for='dat-doing') Deadline
+                    input(type="date", id='dat-doing', name="date_finish", class="entrada date-input", onkeydown="return false", required, readonly)
+
+                    .cont-next 
+                        span(class="material-symbols-outlined", id='btn-next-doing', title="Next fields") arrow_back
+
+                .cont-second-doing
+                    .cont-back 
+                        span(class="material-symbols-outlined", id='btn-bck-doing', title="Go back") arrow_back
+                    h2.subt-title Users in this task
+                    .cont-users-chk
+                            .cont-doing
+
+                    button(type="button" class="btn", id='btn-cambio-fin-task') Finished
+
+script.
+    // Animacion del modal para abrirlo
+    //- document.getElementById('btn-tasks').addEventListener('click', () => {
+    //- });
+    //- document.querySelectorAll('.btn-tasks').forEach(button => {
+    
+    //-     button.addEventListener('click', () => {
+    //-     });
+    //- });
+        
+    // Evento para cerrar el modal
+    document.getElementById('btn-clsRDOin').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-doing");
+        // Primer contenedor
+        const primeraPartForm = document.querySelector('.cont-firsRDoin'); // Aspectos del div
+        // Segundo contenedor
+        const segundaPartForm = document.querySelector('.cont-second-doing');
+        //- segundaPartForm.style.display = "none";
+        // Contenedor de los elementos checkBox
+        const contABorrarSP = document.querySelector('.cont-doing');
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+            primeraPartForm.style.display = "flex";
+            segundaPartForm.style.display = "none";
+            contABorrarSP.innerHTML = ''; // Borramos los elementos creados en la pestaña de tasks BUSCALO
+        }, 200);
+    });
+
+    // Evneto para mostrar la siguiente parte del formulario
+    document.getElementById('btn-next-doing').addEventListener('click', () => {
+        const primeraParteForm = document.querySelector('.cont-firsRDoin'); // Aspectos del div
+        primeraParteForm.style.display = "none";
+        const primeraSegundoForm = document.querySelector('.cont-second-doing');
+        primeraSegundoForm.style.display = "flex";
+    });
+    
+    // Evento para volver al anterior parte del formulario
+    document.getElementById('btn-bck-doing').addEventListener('click', () => {
+        const primeraParteForm = document.querySelector('.cont-firsRDoin'); // Aspectos del div
+        primeraParteForm.style.display = "flex";
+        
+        const primeraSegundoForm = document.querySelector('.cont-second-doing');
+        primeraSegundoForm.style.display = "none";
+    });
+
+    document.getElementById('btn-cambio-fin-task').addEventListener('click', () => {
+        console.log('click')
+        const modal = document.getElementById('Modal-resFin-fin');
+        console.log(modal)
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+    });
+

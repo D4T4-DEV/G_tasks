@@ -1,0 +1,58 @@
+div(class='modal' id='Modal-resFin-fin')
+    .cont-modal 
+        .cont-close-btn
+            span(id='btn-clsFini') &times;
+        h1.title You really want to complete this task?
+        .cont-form
+            form(action=`/` class="formulario" method='POST' autocomplete="off", id='fom-finshi')
+                .cont-firsRD
+                    label(class="etiqueta-form" for ='rs-fin') Reason:
+                    textarea(name="reason", class="entrada text-area", id='rs-fin', required)
+                    .cont-btns
+                        button(type="button", class="btn" id='b-n-fin') NO
+                        //- a(class="btn-del" id='b-del') YES
+                        button(type="submit" class="btn-del") YES
+script.
+    
+    // Evento para cerrar el modal
+    document.getElementById('btn-clsFini').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-resFin-fin");
+        // Primer contenedor
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+        }, 200);
+    });
+
+    document.getElementById('b-n-fin').addEventListener('click', () => {
+        const modal = document.getElementById("Modal-resFin-fin");
+        // Primer contenedor
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Cambios del contenedores
+        }, 200);
+    });
+
+    //- document.getElementById('btn-cambio-fin-task').addEventListener('click', () => {
+    //-     const modal = document.getElementById("Modal-resFin");
+    //-     // Primer contenedor
+    //-     modal.classList.add('show');
+    //-     modal.classList.remove('hide');
+    //-     modal.style.display = 'block';
+    //- });
+
+    //- // Itera sobre cada botón y agrega el event listener
+    //- document.querySelectorAll('.btn-del').forEach(button => {
+    //-     button.addEventListener('click', () => {
+    //-         const modal = document.getElementById("Modal-resFin");
+    //-         // Primer contenedor
+    //-         modal.classList.add('show');
+    //-         modal.classList.remove('hide');
+    //-     });
+    //- });

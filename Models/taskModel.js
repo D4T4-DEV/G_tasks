@@ -101,10 +101,44 @@ async function deleteTask(idTask, token) {
     }
 }
 
+async function acTask(idTask, token) {
+    const axiosConfig = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    };
+    try {
+        // Esperamos una respuesta                                                Este campo vacio es el payload
+        var response = await axios.put(`${process.env.BASE_URL}/task/ac-task-u/${idTask}`,{}, axiosConfig);
+        return response;
+    } catch (err) {
+        console.error('Error al cambiar el estado de la tarea por ID (MODEL): posiblemente la api tenga un fallo o este caida');
+        throw err;
+    }
+}
+
+async function termiTask(idTask,userID, reason, token){
+    const axiosConfig = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    };
+
+    try {
+        const response = await axios.put(`${process.env.BASE_URL}/task/terminate-task/`, {idTask, userID, reason}, axiosConfig);
+        return response;
+    } catch (err) {
+        console.error('Error al terminar una tarea por ID una tarea (MODEL): posiblemente la api tenga un fallo o este caida');
+        throw err;
+    }
+}
+
 module.exports = {
     createNewTask,
     getMyTaskAssigned,
     getTaskForModel,
     modifyTask,
-    deleteTask
+    deleteTask,
+    acTask,
+    termiTask
 };

@@ -26,6 +26,10 @@ const createdTask = require('./createTask');
 const modifiTask = require('./modifyTask');
 // Ruta del proceso para eliminar una tarea
 const deleteTask = require('./deleteTask');
+// Ruta del proceso para la tarea
+const changeStatus = require('./changeStatus');
+// Ruta del proceso para finalizar la tarea
+const finTask = require('./finishTask');
 
 // RUTAS para usar en AJAX
 const getDataForModal = require('./getDataForModal');
@@ -54,7 +58,10 @@ router.use('/create-new-task', createdTask);
 router.use('/delete', deleteTask);
 // Modificar una tarea
 router.use('/edit-task', modifiTask);
-
+// Aceptar la tarea
+router.use('/accep-task', changeStatus);
+// Finalizar la tarea
+router.use('/fin-task/', finTask);
 
 // // Configuracion de la pantalla de myCreatedTask
 // router.use('/created-tasks', pMyCreatedTask);

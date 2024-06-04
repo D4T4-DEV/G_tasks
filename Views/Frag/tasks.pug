@@ -107,6 +107,16 @@ script.
                     }
                 }
 
+                if(parseInt(valuesID[1])=== 3){
+                    try {
+                        const response = await fetch(`/g-d-model/${valuesID[0]}`);
+                        const data = await response.json();
+                        setDataForModalForUserAsigmentDoin(data);
+                    } catch (error) {
+                        console.error('Error al obtener los datos: ', error);
+                    }
+                }
+
                 // Para cuando esta en to done
                 if(parseInt(valuesID[1]) === 4){
                     try {
@@ -287,6 +297,79 @@ script.
                 h3.className = 'subt-title-nop';
                 container.appendChild(h3);
         }
+        // Aspectos del formulario
+        const fomr = document.getElementById('btn-cambio-acp').href = '/accep-task/' + dataForModal.taskID;
+    } 
+
+    function setDataForModalForUserAsigmentDoin(data){
+        const modal = document.getElementById("Modal-doing");
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+
+        const dataForModal = data.dataForModal;
+        const dataUsers = data.dataUsers;
+        const dataOr = data.usersOrden; // Este puede ser nulo
+
+        // Valor del propietario
+        const own = document.getElementById('ownerRDon').textContent = "Owner: " + dataForModal.owner;
+        // Valor del titulo
+        const title = document.getElementById('tlRDoing').value = dataForModal.titleTask;
+        // Opciones
+        const optionRes = document.getElementById('v-resp-doing').textContent  = dataForModal.respUs;
+        // descripcion
+        const descripTask = document.getElementById('des-doing').textContent = dataForModal.instructionsTask;
+        // fecha de entrega
+        const date = document.getElementById('dat-doing').value = new Date(dataForModal.deadLineTask).toISOString().split('T')[0];
+        // Los usuarios responsables
+        const container = document.querySelector('.cont-doing');        
+         
+        // Verificamos que el objeto que queremos iterar tenga algo
+        if(dataOr && Object.keys(dataOr).length > 0){
+            // Recorremos el arreglo que viene ordenado por el server, y creamos los elementos
+            Object.entries(dataOr).forEach(([key, usersArray]) => {
+                // Creamos el subtitulo de cada letra del alfabeto
+                const h2 = document.createElement('h2');
+                h2.textContent = key;
+                h2.className = 'subt-title';
+                container.appendChild(h2);
+                // Creamos la lista
+                const ul = document.createElement('ul');
+                ul.className = 'list';
+                container.appendChild(ul);
+                usersArray.forEach(user => {
+                    // Creamos el elemento de la lista
+                    const li = document.createElement('li');
+                    li.className = 'element';
+                    // Creamos la etiqueta
+                    const label = document.createElement('label');
+                    label.className = 'txt-label';
+                    // Creamos el checkbox
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.name = 'user_respon';
+                    input.className = 'chkex';
+                    input.checked = true;
+                    input.disabled = true;
+                    // Añadimos el checkbox a la etiqueta
+                    label.appendChild(input);
+                    // Añadimos el nombre del usuario a la etiqueta
+                    label.appendChild(document.createTextNode(user));
+                    // Añadir la etiqueta al elemento de la lista
+                    li.appendChild(label);
+                    // Añadir el elemento de la lista a la lista
+                    ul.appendChild(li);
+                });
+            });
+        }else{
+                const h3 = document.createElement('h3');
+                h3.textContent = "No user has been assigned for this task, only the responsible one.";
+                h3.className = 'subt-title-nop';
+                container.appendChild(h3);
+        }
+        // Aspectos del formulario
+        const fomr = document.getElementById('fom-finshi').action = '/fin-task/' + dataForModal.taskID;
+
     } 
 
     function setDataForModalDone(data){

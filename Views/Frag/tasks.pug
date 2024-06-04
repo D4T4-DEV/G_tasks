@@ -74,7 +74,7 @@ script.
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('h1.title-task').forEach(element => {
             // Le damos por cada elemento la comprobacion 
-            element.textContent = truncateTitle(element.textContent, 30);
+            element.textContent = truncateTitle(element.textContent, 12);
         });
         // Obtenemos los elementos que coincidan con este medio, devuelve un arreglo con los elementos con un index
         // Iteramos en cada uno y le asignamos el evento del click
@@ -370,7 +370,7 @@ script.
         }
         // Aspectos del formulario
         const fomr = document.getElementById('fom-finshi').action = '/fin-task/' + dataForModal.taskID;
-
+        const fomrC = document.getElementById('fom-can-task').action = '/can-task/' + dataForModal.taskID;
     } 
 
     function setDataForModalDone(data){

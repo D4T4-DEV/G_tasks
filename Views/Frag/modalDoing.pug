@@ -32,8 +32,9 @@ div(class='modal' id='Modal-doing')
                     .cont-users-chk
                             .cont-doing
                             
-                    button(type="button" class="btn", id='btn-cambio-fin-task') Finished
-
+                    .cont-btns
+                        button(type="submit", class="btn" id='btn-cnc-to-doin') Cancell
+                        button(type="button" class="btn", id='btn-cambio-fin-task') Finished
 script.
     // Animacion del modal para abrirlo
     //- document.getElementById('btn-tasks').addEventListener('click', () => {
@@ -92,3 +93,9 @@ script.
         modal.style.display = 'block';
     });
 
+    document.getElementById('btn-cnc-to-doin').addEventListener('click', () => {
+        const modal = document.getElementById('Modal-res-can');
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        modal.style.display = 'block';
+    });
